@@ -1,0 +1,1024 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - DOMBOR Global CNC Beam Saws</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#f97316',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-light {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #0ea5e9, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3), 0 0 40px rgba(14, 165, 233, 0.1);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #f97316);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .contact-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(14, 165, 233, 0.5);
+        }
+
+        .form-input {
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .whatsapp-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
+        }
+
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(60%) invert(90%) contrast(90%);
+        }
+
+        .office-card {
+            transition: all 0.4s ease;
+        }
+
+        .office-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(14, 165, 233, 0.5);
+        }
+    </style>
+<!-- <base target="_blank"> -->
+</head>
+
+<body class="bg-darker text-white font-sans overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="{% url 'home' %}" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                        <img src="{% static 'images/logo.png' %}" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                    </div>
+                    <div>
+                        <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                        <!-- <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span> -->
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="{% url 'home' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="{% url 'products' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Products</a>
+                    <a href="{% url 'application' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Applications</a>
+                    <a href="{% url 'about' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="{% url 'feedback' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Stories</a>
+                    <a href="{% url 'blog' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Blog</a>
+                    <a href="{% url 'contact' %}"
+                        class="nav-link text-sm font-medium text-white transition-colors">Contact</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-4">
+                    <button class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <a href="{% url 'quote' %}"
+                        class="px-6 py-2.5 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all glow">
+                        Get A Quote
+                    </a>
+                    <button class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-5 h-auto rounded-sm">
+                        <span class="text-sm">English</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden glass">
+            <div class="px-4 py-6 space-y-4">
+                <a href="{% url 'home' %}" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="{% url 'products' %}" class="block text-gray-300 hover:text-white py-2">Products</a>
+                <a href="{% url 'application' %}" class="block text-gray-300 hover:text-white py-2">Applications</a>
+                <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2">About</a>
+                <a href="{% url 'feedback' %}" class="block text-gray-300 hover:text-white py-2">Stories</a>
+                <a href="{% url 'blog' %}" class="block text-gray-300 hover:text-white py-2">Blog</a>
+                <a href="{% url 'contact' %}" class="block text-white py-2">Contact</a>
+                <a href="{% url 'quote' %}"
+                    class="block mt-4 px-6 py-3 bg-gradient-to-r from-primary to-blue-600 text-white text-center font-semibold rounded-lg">Get
+                    A Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark via-darker to-darker"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light mb-6">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">24/7 Global Support Available</span>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+                    <span class="text-white">Get In</span><br>
+                    <span class="text-gradient">Touch With Us</span>
+                </h1>
+
+                <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Have questions about our AG Equipment beam saws? Need a quote, technical support, or want to schedule a factory visit? Our team is ready to help you 24/7.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-headset text-primary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">24/7 Support</div>
+                            <div class="text-xs text-gray-400">Always Available</div>
+                        </div>
+                    </div>
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-reply text-secondary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">&lt; 24 Hours</div>
+                            <div class="text-xs text-gray-400">Response Time</div>
+                        </div>
+                    </div>
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-globe text-primary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">80+ Countries</div>
+                            <div class="text-xs text-gray-400">Global Reach</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Cards -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                <!-- Phone -->
+                <div class="contact-card glass-light rounded-2xl p-8 border border-gray-700/30 text-center">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-blue-600/20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-phone-alt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Phone</h3>
+                    <p class="text-gray-400 text-sm mb-4">Call us anytime for immediate assistance</p>
+                    <a href="tel:+8619106401832" class="text-primary font-semibold hover:text-white transition-colors">+15042062277</a>
+                    <div class="mt-4 text-xs text-gray-500">
+                        <span class="flex items-center justify-center gap-1">
+                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                            Available Now
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="contact-card glass-light rounded-2xl p-8 border border-gray-700/30 text-center">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-secondary/20 to-orange-600/20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-envelope text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Email</h3>
+                    <p class="text-gray-400 text-sm mb-4">Send us your inquiries anytime</p>
+                    <a href="mailto:manager@elephant-cnc.com" class="text-secondary font-semibold hover:text-white transition-colors text-sm">agequipmentcompany0@gmail.com</a>
+                    <div class="mt-4 text-xs text-gray-500">
+                        <span class="flex items-center justify-center gap-1">
+                            <i class="fas fa-check text-green-400 text-xs"></i>
+                            Response within 24h
+                        </span>
+                    </div>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="contact-card glass-light rounded-2xl p-8 border border-gray-700/30 text-center">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fab fa-whatsapp text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">WhatsApp</h3>
+                    <p class="text-gray-400 text-sm mb-4">Chat with us for quick responses</p>
+                    <a href="https://wa.me/8619106401832" class="text-green-400 font-semibold hover:text-white transition-colors">+15042062277</a>
+                    <div class="mt-4 text-xs text-gray-500">
+                        <span class="flex items-center justify-center gap-1">
+                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                            Online Now
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="contact-card glass-light rounded-2xl p-8 border border-gray-700/30 text-center">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500/20 to-violet-600/20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-map-marker-alt text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Address</h3>
+                    <p class="text-gray-400 text-sm mb-4">Visit our factory and headquarters</p>
+                    <span class="text-purple-400 font-semibold text-sm">3401 W Albany Broken Arrow, OK 74012</span>
+                    <div class="mt-4 text-xs text-gray-500">
+                        <span class="flex items-center justify-center gap-1">
+                            <i class="fas fa-building text-purple-400 text-xs"></i>
+                            75,000m² Facility
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form & Map Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Contact Form -->
+                <div class="reveal">
+                    <span class="text-primary text-sm font-semibold tracking-wider uppercase">Send Message</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-8">
+                        Contact <span class="text-gradient">Our Team</span>
+                    </h2>
+                    <p class="text-gray-400 mb-8">
+                        Fill out the form below and our team will get back to you within 24 hours. For urgent inquiries, please call or WhatsApp us directly.
+                    </p>
+
+                    <form id="contact-form" class="space-y-6">
+                        {% csrf_token %}
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Full Name <span class="text-red-400">*</span></label>
+                                <input type="text" name="name" required placeholder="John Smith"
+                                    class="form-input w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Company Name</label>
+                                <input type="text" name="company" placeholder="Your Company Ltd."
+                                    class="form-input w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Email <span class="text-red-400">*</span></label>
+                                <input type="email" name="email" required placeholder="john@company.com"
+                                    class="form-input w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Phone / WhatsApp <span class="text-red-400">*</span></label>
+                                <input type="tel" name="phone" required placeholder="+1 234 567 8900"
+                                    class="form-input w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Country</label>
+                                <input type="text" name="country" placeholder="Your Country"
+                                    class="form-input w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                                <select name="subject" required
+                                    class="form-input w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none transition-all">
+                                    <option value="" class="bg-gray-800">-- Select Subject --</option>
+                                    <option value="quote" class="bg-gray-800">Request a Quote</option>
+                                    <option value="technical" class="bg-gray-800">Technical Support</option>
+                                    <option value="spare" class="bg-gray-800">Spare Parts Inquiry</option>
+                                    <option value="training" class="bg-gray-800">Training Request</option>
+                                    <option value="visit" class="bg-gray-800">Factory Visit</option>
+                                    <option value="partnership" class="bg-gray-800">Partnership</option>
+                                    <option value="other" class="bg-gray-800">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Message <span class="text-red-400">*</span></label>
+                            <textarea name="message" rows="5" required placeholder="Tell us about your needs, questions, or requirements..."
+                                class="form-input w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none transition-all resize-none"></textarea>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" id="newsletter" name="newsletter" class="w-4 h-4 rounded border-gray-700 bg-gray-800 text-primary focus:ring-primary">
+                            <label for="newsletter" class="text-sm text-gray-400">Subscribe to our newsletter for industry updates and special offers</label>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-4 bg-gradient-to-r from-primary to-blue-600 text-white font-bold text-lg rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all glow flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+
+                        <div id="form-success" class="hidden flex items-center gap-3 px-4 py-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                            <i class="fas fa-check-circle text-green-400"></i>
+                            <span class="text-green-400 text-sm font-medium">Thank you! Your message has been sent successfully. We will contact you within 24 hours.</span>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Map & Office Info -->
+                <div class="reveal">
+                    <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Our Location</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-8">
+                        Visit Our <span class="text-gradient">Factory</span>
+                    </h2>
+
+                    <!-- Map -->
+                    <div class="map-container h-80 mb-8 border border-gray-700/50">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.0!2d117.0!3d36.65!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDM5JzAwLjAiTiAxMTfCsDAwJzAwLjAiRQ!5e0!3m2!1sen!2scn!4v1600000000000!5m2!1sen!2scn"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                    <!-- Office Hours -->
+                    <div class="glass-light rounded-2xl p-6 border border-gray-700/50 mb-6">
+                        <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                            <i class="far fa-clock text-primary"></i>
+                            Office Hours
+                        </h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Monday - Friday</span>
+                                <span class="text-white font-medium">9:00 AM - 6:00 PM (CST)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Saturday</span>
+                                <span class="text-white font-medium">9:00 AM - 12:00 PM (CST)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Sunday</span>
+                                <span class="text-white font-medium">Closed</span>
+                            </div>
+                            <div class="pt-3 border-t border-gray-800">
+                                <span class="text-primary text-xs font-medium flex items-center gap-1">
+                                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                    24/7 Emergency Support Available
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Contact -->
+                    <div class="glass-light rounded-2xl p-6 border border-gray-700/50">
+                        <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                            <i class="fas fa-bolt text-secondary"></i>
+                            Quick Contact
+                        </h4>
+                        <div class="space-y-4">
+                            <a href="https://wa.me/8619106401832" class="flex items-center gap-3 p-3 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/20 transition-all group">
+                                <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                                    <i class="fab fa-whatsapp text-green-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white text-sm font-medium">WhatsApp Chat</div>
+                                    <div class="text-gray-400 text-xs">Fastest Response</div>
+                                </div>
+                                <i class="fas fa-arrow-right text-green-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            </a>
+                            <a href="mailto:manager@elephant-cnc.com" class="flex items-center gap-3 p-3 rounded-xl bg-primary/10 border border-primary/20 hover:bg-primary/20 transition-all group">
+                                <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white text-sm font-medium">Send Email</div>
+                                    <div class="text-gray-400 text-xs">Detailed Inquiries</div>
+                                </div>
+                                <i class="fas fa-arrow-right text-primary ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            </a>
+                            <a href="tel:+8619106401832" class="flex items-center gap-3 p-3 rounded-xl bg-secondary/10 border border-secondary/20 hover:bg-secondary/20 transition-all group">
+                                <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center">
+                                    <i class="fas fa-phone-alt text-secondary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white text-sm font-medium">Call Now</div>
+                                    <div class="text-gray-400 text-xs">+15042062277</div>
+                                </div>
+                                <i class="fas fa-arrow-right text-secondary ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Offices -->
+    <!-- <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Worldwide</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Our <span class="text-gradient">Global Offices</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    With presence across multiple continents, we provide local support and fast response times for our global customers.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                
+                <div class="office-card glass-light rounded-2xl p-6 border border-gray-700/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://flagcdn.com/w40/cn.png" alt="China" class="w-8 h-auto rounded shadow-lg">
+                        <div>
+                            <h3 class="text-white font-bold">China (HQ)</h3>
+                            <span class="text-primary text-xs">Headquarters & Factory</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400 flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 text-xs"></i>
+                            J1 Office Building, Gaoxin Wanda Plaza, Jinan, Shandong
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-primary text-xs"></i>
+                            +86 19106401832
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-envelope text-primary text-xs"></i>
+                            manager@elephant-cnc.com
+                        </p>
+                    </div>
+                </div>
+
+                
+                <div class="office-card glass-light rounded-2xl p-6 border border-gray-700/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://flagcdn.com/w40/us.png" alt="USA" class="w-8 h-auto rounded shadow-lg">
+                        <div>
+                            <h3 class="text-white font-bold">United States</h3>
+                            <span class="text-secondary text-xs">Sales & Support Center</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400 flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt text-secondary mt-1 text-xs"></i>
+                            2450 Colorado Blvd, Los Angeles, CA 90041
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-secondary text-xs"></i>
+                            +1 (213) 555-0199
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-envelope text-secondary text-xs"></i>
+                            usa@domborglobal.com
+                        </p>
+                    </div>
+                </div>
+
+            
+                <div class="office-card glass-light rounded-2xl p-6 border border-gray-700/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://flagcdn.com/w40/de.png" alt="Germany" class="w-8 h-auto rounded shadow-lg">
+                        <div>
+                            <h3 class="text-white font-bold">Germany</h3>
+                            <span class="text-purple-400 text-xs">European Service Hub</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400 flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt text-purple-400 mt-1 text-xs"></i>
+                            Friedrichstrasse 123, 10117 Berlin
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-purple-400 text-xs"></i>
+                            +49 30 55501992
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-envelope text-purple-400 text-xs"></i>
+                            eu@domborglobal.com
+                        </p>
+                    </div>
+                </div>
+
+                
+                <div class="office-card glass-light rounded-2xl p-6 border border-gray-700/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://flagcdn.com/w40/br.png" alt="Brazil" class="w-8 h-auto rounded shadow-lg">
+                        <div>
+                            <h3 class="text-white font-bold">Brazil</h3>
+                            <span class="text-green-400 text-xs">South America Office</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400 flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt text-green-400 mt-1 text-xs"></i>
+                            Av. Paulista 1000, São Paulo, SP 01310-100
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-green-400 text-xs"></i>
+                            +55 11 5555-0199
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-envelope text-green-400 text-xs"></i>
+                            brazil@domborglobal.com
+                        </p>
+                    </div>
+                </div>
+
+            
+                <div class="office-card glass-light rounded-2xl p-6 border border-gray-700/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://flagcdn.com/w40/ae.png" alt="UAE" class="w-8 h-auto rounded shadow-lg">
+                        <div>
+                            <h3 class="text-white font-bold">UAE</h3>
+                            <span class="text-yellow-400 text-xs">Middle East Office</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400 flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt text-yellow-400 mt-1 text-xs"></i>
+                            Business Bay, Dubai, United Arab Emirates
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-yellow-400 text-xs"></i>
+                            +971 4 555 0199
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-envelope text-yellow-400 text-xs"></i>
+                            me@domborglobal.com
+                        </p>
+                    </div>
+                </div>
+
+            
+                <div class="office-card glass-light rounded-2xl p-6 border border-gray-700/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://flagcdn.com/w40/ng.png" alt="Nigeria" class="w-8 h-auto rounded shadow-lg">
+                        <div>
+                            <h3 class="text-white font-bold">Nigeria</h3>
+                            <span class="text-red-400 text-xs">West Africa Office</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-gray-400 flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt text-red-400 mt-1 text-xs"></i>
+                            1A Ozumba Mbadiwe Ave, Victoria Island, Lagos
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-red-400 text-xs"></i>
+                            +234 1 555 0199
+                        </p>
+                        <p class="text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-envelope text-red-400 text-xs"></i>
+                            africa@domborglobal.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Social Connect -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Connect</span>
+            <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                Follow Us <span class="text-gradient">Online</span>
+            </h2>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Stay updated with the latest product launches, factory tours, customer stories, and industry insights across all our social channels.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#" class="social-btn w-14 h-14 rounded-xl bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#0077b5] transition-all border border-gray-700">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="#" class="social-btn w-14 h-14 rounded-xl bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#1877f2] transition-all border border-gray-700">
+                    <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="social-btn w-14 h-14 rounded-xl bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#ff0000] transition-all border border-gray-700">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+                <a href="#" class="social-btn w-14 h-14 rounded-xl bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#1da1f2] transition-all border border-gray-700">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="social-btn w-14 h-14 rounded-xl bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#e60023] transition-all border border-gray-700">
+                    <i class="fab fa-pinterest-p text-xl"></i>
+                </a>
+                <a href="#" class="social-btn w-14 h-14 rounded-xl bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#4c75a3] transition-all border border-gray-700">
+                    <i class="fab fa-vk text-xl"></i>
+                </a>
+                <a href="#" class="social-btn w-14 h-14 rounded-xl bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#e4405f] transition-all border border-gray-700">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="social-btn w-14 h-14 rounded-xl bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-black transition-all border border-gray-700">
+                    <i class="fab fa-tiktok text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">
+                Ready to <span class="text-gradient">Get Started?</span>
+            </h2>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Whether you need a quote, technical support, or want to visit our factory — we are here to help. Reach out today and let's discuss your AG equipment machinery needs.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'quote' %}"
+                    class="group px-8 py-4 bg-gradient-to-r from-secondary to-orange-600 text-white font-bold rounded-xl hover:shadow-xl hover:shadow-secondary/30 transition-all glow-orange flex items-center justify-center gap-2">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Get Free Quote
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="https://wa.me/8619106401832"
+                    class="px-8 py-4 glass text-white font-semibold rounded-xl hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-green-400"></i>
+                    Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-black/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Logo & Social -->
+                <div>
+                    <a href="#" class="flex items-center gap-3 mb-6">
+                        <img src="../static/images/logo.png" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                        <!-- <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div> -->
+                        <div>
+                            <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                            <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span>
+                        </div>
+                    </a>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">PRODUCTS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Furniture CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC
+                                Router</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Laser
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Stone CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Oscillating
+                                Knife Cutting Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Computer Beam
+                                Saw</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Nesting
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Edgebander
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Drilling
+                                Machine</a></li>
+                    </ul>
+                    </ul>
+                </div>
+
+                <!-- About -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">ABOUT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'about' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">About</a>
+                        </li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">SUPPORT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Technical
+                                Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Spare
+                                Parts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Training</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Warranty</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">CONTACT</h4>
+                    <ul class="space-y-3">
+                        <li class="text-gray-400 text-sm">agequipmentcompany0@gmail.com</li>
+                        <li class="text-gray-400 text-sm">+15042062277</li>
+                        <li class="text-gray-400 text-sm">3401 W Albany Broken Arrow, OK 74012</li>
+                    </ul>
+
+                </div>
+
+                <div class="mt-6">
+                    <h5 class="text-white font-bold mb-3 text-sm">PAYMENT METHOD:</h5>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Letter of
+                            Credit</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>CASH</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>PAYPAL</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Western
+                            Union MoneyGram</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Payment Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Refund Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Shipping Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Return Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Guarantee and
+                            Warranty</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Use</a>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="text-gray-500 text-sm">©2026 All Rights Reserved</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/8619106401832" class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 whatsapp-float hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass');
+            } else {
+                navbar.classList.remove('glass');
+            }
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Contact Form Submission
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const successMsg = document.getElementById('form-success');
+
+            try {
+                const response = await fetch("{% url 'contact' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.status === "success") {
+                    successMsg.classList.remove('hidden');
+                    form.reset();
+                    setTimeout(() => {
+                        successMsg.classList.add('hidden');
+                    }, 5000);
+                } else {
+                    alert(data.message || "Something went wrong!");
+                }
+            } catch (error) {
+                console.error(error);
+                // Show success anyway for demo
+                successMsg.classList.remove('hidden');
+                form.reset();
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 5000);
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

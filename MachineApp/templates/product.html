@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AG NOVA SI400 | AG Equipment CNC Machine</title>
+    <meta name="description" content="AG NOVA SI400 by AG Equipment. View machine specifications, features, model number SI400 and manufacturer part number AG-NOVA-SI400.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://agequipment.com/product/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#f97316',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'slide-left': 'slideLeft 30s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideLeft: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-light {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #0ea5e9, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3), 0 0 40px rgba(14, 165, 233, 0.1);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #f97316);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .product-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            z-index: 50;
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+
+        .spec-row {
+            transition: all 0.3s ease;
+        }
+
+        .spec-row:hover {
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            border-color: transparent;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            transition: all 0.3s ease;
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .tab-btn.active {
+            border-bottom: 2px solid #0ea5e9;
+            color: #0ea5e9;
+        }
+
+        .whatsapp-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+    <!-- <base target="_blank"> -->
+</head>
+
+<body class="bg-darker text-white font-sans overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+
+                        <img src="../static/images/logo.png" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                    </div>
+                    <div>
+                        <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                        <!-- <span class="text-xs text-primary block -mt-1">GLOBAL MACHINERY</span> -->
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="{% url 'home' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="{% url 'products' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Products</a>
+                    <a href="{% url 'application' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Applications</a>
+                    <a href="{% url 'about' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="{% url 'story' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Stories</a>
+                    <a href="{% url 'blog' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Blog</a>
+                    <a href="{% url 'contact' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-4">
+                    <button class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <a href="#" onclick="openQuoteModal(); return false;"
+                        class="px-6 py-2.5 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all glow">
+                        Get A Quote
+                    </a>
+                    <button class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-5 h-auto rounded-sm">
+                        <span class="text-sm">English</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden glass">
+            <div class="px-4 py-6 space-y-4">
+                <a href="{% url 'home' %}" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="{% url 'products' %}" class="block text-gray-300 hover:text-white py-2">Products</a>
+                <a href="{% url 'application' %}" class="block text-gray-300 hover:text-white py-2">Applications</a>
+                <a href="{% url 'about' }" class="block text-gray-300 hover:text-white py-2">About</a>
+                <a href="{% url 'story' %}" class="block text-gray-300 hover:text-white py-2">Stories</a>
+                <a href="{% url 'contact' %}" class="block text-gray-300 hover:text-white py-2">Contact</a>
+                <a href="#" onclick="openQuoteModal(); return false;"
+                    class="px-6 py-2.5 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all glow">
+                    Get A Quote
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark via-darker to-darker"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light mb-6">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">6 Professional Models Available</span>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+                    <span class="text-white">Computer Beam Saw</span><br>
+                    <span class="text-gradient">Product Lineup</span>
+                </h1>
+
+                <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                    From entry-level to fully automated industrial systems, find the perfect cutting solution for your
+                    furniture production needs. All models feature ±0.1mm precision cutting.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-ruler-combined text-primary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">2800-4200mm</div>
+                            <div class="text-xs text-gray-400">Cutting Length</div>
+                        </div>
+                    </div>
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-crosshairs text-secondary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">±0.1mm</div>
+                            <div class="text-xs text-gray-400">Precision</div>
+                        </div>
+                    </div>
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-globe text-primary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">80+ Countries</div>
+                            <div class="text-xs text-gray-400">Exported</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-8 sticky top-20 z-40 bg-darker/90 backdrop-blur-md border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-center gap-3 reveal">
+                <button class="filter-btn active px-6 py-2 rounded-full border border-gray-700 text-sm font-medium"
+                    data-filter="all">All Models</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 hover:text-white text-sm font-medium"
+                    data-filter="entry">Entry Level</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 hover:text-white text-sm font-medium"
+                    data-filter="automatic">Automatic Loading</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 hover:text-white text-sm font-medium"
+                    data-filter="industrial">Industrial</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 hover:text-white text-sm font-medium"
+                    data-filter="heavy">Heavy Duty</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MPN / Model Number Search -->
+    <section class="py-8 relative bg-dark border-b border-gray-800/50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-5">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Machine Search</span>
+                <h2 class="text-2xl md:text-3xl font-display font-bold mt-2 text-white">Search by Model Number or MPN</h2>
+                <p class="text-gray-400 text-sm mt-2">Search for AG NOVA SI400 using <strong class="text-gray-300">SI400</strong> or <strong class="text-gray-300">AG-NOVA-SI400</strong>.</p>
+            </div>
+            <form id="mpn-search-form" class="flex flex-col sm:flex-row gap-3" role="search">
+                <label for="mpn-search-input" class="sr-only">Machine model number or MPN</label>
+                <input id="mpn-search-input" type="search" autocomplete="off" placeholder="Enter model number or MPN e.g. AG-NOVA-SI400" class="flex-1 px-5 py-3 bg-gray-800/70 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                <button type="submit" class="px-7 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all">
+                    <i class="fas fa-search mr-2"></i>Search Machine
+                </button>
+            </form>
+            <p id="mpn-search-message" class="hidden text-sm mt-3 text-center" aria-live="polite"></p>
+        </div>
+    </section>
+
+    <!-- Product Grid -->
+    <section id="products" class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
+
+                <!-- Product 1: Entry Level -->
+                <div class="product-item group" data-category="entry" data-mpn="AG-NOVA-SI400" data-model="SI400">
+                    <div
+                        class="product-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col">
+                        <div class="relative h-64 overflow-hidden bg-gray-800">
+                            <img src="../static/images/G.jpeg" alt="AG NOVA SI400 CNC Machine - AG Equipment"
+                                class="product-img w-full h-full object-cover transition-transform duration-700">
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-primary/90 text-white text-xs font-bold rounded-full">
+                                BESTSELLER</div>
+                            <div
+                                class="absolute top-4 right-4 px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full">
+                                IN STOCK</div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                                <button onclick="openProductModal('entry')"
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-eye mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-primary font-semibold uppercase tracking-wider">Entry
+                                    Level</span>
+                                <div class="flex items-center gap-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-sm text-gray-300">4.0</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">AG NOVA SI400</h3>
+                            <p class="text-xs text-primary mb-2">Model: SI400 &nbsp; | &nbsp; MPN: AG-NOVA-SI400</p>
+                            <p class="text-sm text-gray-400 mb-4 flex-1">Perfect for small to medium furniture
+                                factories. Reliable performance with essential cutting features.</p>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i class="fas fa-ruler text-primary mr-2"></i>Max
+                                        Length</span>
+                                    <span class="text-white font-medium">3,200 mm</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-crosshairs text-primary mr-2"></i>Precision</span>
+                                    <span class="text-white font-medium">±0.1mm</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-tachometer-alt text-primary mr-2"></i>Speed</span>
+                                    <span class="text-white font-medium">3,700 rpm</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <button onclick="openQuoteModal('AG NOVA SI400')"
+                                    class="flex-1 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                    Get Quote
+                                </button>
+                                <button
+                                    class="px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:border-primary hover:text-primary transition-all">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2: Automatic Loading -->
+                <div class="product-item group" data-category="automatic">
+                    <div
+                        class="product-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col glow">
+                        <div class="relative h-64 overflow-hidden bg-gray-800">
+                            <img src="../static/images/m8.webp" alt="280HG Automatic"
+                                class="product-img w-full h-full object-cover transition-transform duration-700">
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full">
+                                AUTOMATED</div>
+                            <div
+                                class="absolute top-4 right-4 px-3 py-1 bg-blue-500/90 text-white text-xs font-bold rounded-full">
+                                POPULAR</div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                                <button onclick="openProductModal('280hg')"
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-eye mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-green-400 font-semibold uppercase tracking-wider">AG Equipment
+                                    Automatic
+                                    Loading</span>
+                                <div class="flex items-center gap-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-sm text-gray-300">5.0</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">AG Automatic Loading</h3>
+                            <p class="text-sm text-gray-400 mb-4 flex-1">Front-loading automatic system reduces labor by
+                                2-3 workers. Ideal for cabinet and wardrobe factories.</p>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i class="fas fa-ruler text-primary mr-2"></i>Max
+                                        Length</span>
+                                    <span class="text-white font-medium">2800mm</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-robot text-primary mr-2"></i>Loading</span>
+                                    <span class="text-white font-medium">Automatic</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-tachometer-alt text-primary mr-2"></i>Speed</span>
+                                    <span class="text-white font-medium">100m/min</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <button onclick="openQuoteModal('280HG Automatic Loading')"
+                                    class="flex-1 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                    Get Quote
+                                </button>
+                                <button
+                                    class="px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:border-primary hover:text-primary transition-all">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3: Industrial -->
+                <div class="product-item group" data-category="industrial">
+                    <div
+                        class="product-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col">
+                        <div class="relative h-64 overflow-hidden bg-gray-800">
+                            <img src="../static/images/mp2.webp" alt="330C Rear Feeding"
+                                class="product-img w-full h-full object-cover transition-transform duration-700">
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-purple-500/90 text-white text-xs font-bold rounded-full">
+                                INDUSTRIAL</div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                                <button onclick="openProductModal('330c')"
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-eye mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-purple-400 font-semibold uppercase tracking-wider">AG
+                                    Equipment Industrial</span>
+                                <div class="flex items-center gap-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-sm text-gray-300">4.9</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">AG Rear Feeding</h3>
+                            <p class="text-sm text-gray-400 mb-4 flex-1">Rear feeding system for high-speed continuous
+                                production. Line integration ready for smart factories.</p>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i class="fas fa-ruler text-primary mr-2"></i>Max
+                                        Length</span>
+                                    <span class="text-white font-medium">2800mm</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-cogs text-primary mr-2"></i>Feeding</span>
+                                    <span class="text-white font-medium">Rear Auto</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-tachometer-alt text-primary mr-2"></i>Speed</span>
+                                    <span class="text-white font-medium">120m/min</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <button onclick="openQuoteModal('330C Rear Feeding')"
+                                    class="flex-1 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                    Get Quote
+                                </button>
+                                <button
+                                    class="px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:border-primary hover:text-primary transition-all">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4: Premium -->
+                <div class="product-item group" data-category="industrial">
+                    <div
+                        class="product-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col glow">
+                        <div class="relative h-64 overflow-hidden bg-gray-800">
+                            <img src="../static/images/D.png" alt="420 Beam Saw"
+                                class="product-img w-full h-full object-cover transition-transform duration-700">
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-primary/90 text-white text-xs font-bold rounded-full">
+                                PREMIUM</div>
+                            <div
+                                class="absolute top-4 right-4 px-3 py-1 bg-yellow-500/90 text-white text-xs font-bold rounded-full">
+                                TOP RATED</div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                                <button onclick="openProductModal('420')"
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-eye mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-primary font-semibold uppercase tracking-wider">Premium</span>
+                                <div class="flex items-center gap-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-sm text-gray-300">5.0</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">420 Large Format</h3>
+                            <p class="text-sm text-gray-400 mb-4 flex-1">Dual saw blade system with smart optimization
+                                software. Large format cutting up to 4200mm for mass production.</p>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i class="fas fa-ruler text-primary mr-2"></i>Max
+                                        Length</span>
+                                    <span class="text-white font-medium">4200mm</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-layer-group text-primary mr-2"></i>Blades</span>
+                                    <span class="text-white font-medium">Dual System</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-brain text-primary mr-2"></i>Software</span>
+                                    <span class="text-white font-medium">Smart Opti</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <button onclick="openQuoteModal('420 Large Format')"
+                                    class="flex-1 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                    Get Quote
+                                </button>
+                                <button
+                                    class="px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:border-primary hover:text-primary transition-all">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5: Heavy Duty -->
+                <div class="product-item group" data-category="heavy">
+                    <div
+                        class="product-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col">
+                        <div class="relative h-64 overflow-hidden bg-gray-800">
+                            <img src="../static/images/T.png" alt="380 Heavy Duty"
+                                class="product-img w-full h-full object-cover transition-transform duration-700">
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-red-500/90 text-white text-xs font-bold rounded-full">
+                                HEAVY DUTY</div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                                <button onclick="openProductModal('380')"
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-eye mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-red-400 font-semibold uppercase tracking-wider">Heavy
+                                    Duty</span>
+                                <div class="flex items-center gap-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-sm text-gray-300">4.9</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">AG Equipment T-Glide</h3>
+                            <p class="text-sm text-gray-400 mb-4 flex-1">AG sliding table saw with a
+                                380 mm saw blade, engineered for continuous 24/7 production and precision cutting.</p>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i class="fas fa-ruler text-primary mr-2"></i>Max
+                                        Length</span>
+                                    <span class="text-white font-medium">3800mm</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i class="fas fa-circle text-primary mr-2"></i>Blade
+                                        Dia</span>
+                                    <span class="text-white font-medium">380mm</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-shield-alt text-primary mr-2"></i>Build</span>
+                                    <span class="text-white font-medium">Industrial</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <button onclick="openQuoteModal('380 Heavy Duty')"
+                                    class="flex-1 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                    Get Quote
+                                </button>
+                                <button
+                                    class="px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:border-primary hover:text-primary transition-all">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6: Compact -->
+                <div class="product-item group" data-category="entry">
+                    <div
+                        class="product-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col">
+                        <div class="relative h-64 overflow-hidden bg-gray-800">
+                            <img src="../static/images/compact.jpeg" alt="280 Compact"
+                                class="product-img w-full h-full object-cover transition-transform duration-700">
+                            <div
+                                class="absolute top-4 left-4 px-3 py-1 bg-yellow-500/90 text-white text-xs font-bold rounded-full">
+                                COMPACT</div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                                <button onclick="openProductModal('280c')"
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-eye mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span
+                                    class="text-xs text-yellow-400 font-semibold uppercase tracking-wider">Compact</span>
+                                <div class="flex items-center gap-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-sm text-gray-300">4.7</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">AG Equipment Fixed Shaper</h3>
+                            <p class="text-sm text-gray-400 mb-4 flex-1">11 HP, 3-Phase Motor (220 V) | Reverse Spindle
+                                Rotation with Electrical Interlock</p>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i class="fas fa-ruler text-primary mr-2"></i>Max
+                                        Length</span>
+                                    <span class="text-white font-medium">1200 × 730 mm Precision</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i
+                                            class="fas fa-compress text-primary mr-2"></i>Footprint</span>
+                                    <span class="text-white font-medium">Compact</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400"><i class="fas fa-tachometer-alt text-primary mr-2"></i>5
+                                        spindle speed</span>
+                                    <span class="text-white font-medium"> 3000 / 4500 / 6000 / 7000 / 10000 rpm</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <button onclick="openQuoteModal('280C Compact')"
+                                    class="flex-1 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                    Get Quote
+                                </button>
+                                <button
+                                    class="px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:border-primary hover:text-primary transition-all">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Compare</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Model <span class="text-gradient">Comparison</span>
+                </h2>
+                <p class="text-gray-400">Find the perfect match for your production requirements</p>
+            </div>
+
+            <div class="overflow-x-auto reveal">
+                <table class="comparison-table w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-gray-700">
+                            <th class="py-4 px-6 text-gray-400 font-medium">Specification</th>
+                            <th class="py-4 px-6 text-white font-bold">ELECNC-280</th>
+                            <th class="py-4 px-6 text-white font-bold">280HG</th>
+                            <th class="py-4 px-6 text-white font-bold">330C</th>
+                            <th class="py-4 px-6 text-white font-bold">420</th>
+                            <th class="py-4 px-6 text-white font-bold">380</th>
+                            <th class="py-4 px-6 text-white font-bold">280C</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-gray-800 spec-row">
+                            <td class="py-4 px-6 text-gray-300">Max Cutting Length</td>
+                            <td class="py-4 px-6 text-white">2800mm</td>
+                            <td class="py-4 px-6 text-white">2800mm</td>
+                            <td class="py-4 px-6 text-white">3300mm</td>
+                            <td class="py-4 px-6 text-white font-bold text-primary">4200mm</td>
+                            <td class="py-4 px-6 text-white">3800mm</td>
+                            <td class="py-4 px-6 text-white">2800mm</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 spec-row">
+                            <td class="py-4 px-6 text-gray-300">Cutting Precision</td>
+                            <td class="py-4 px-6 text-white">±0.1mm</td>
+                            <td class="py-4 px-6 text-white">±0.1mm</td>
+                            <td class="py-4 px-6 text-white">±0.1mm</td>
+                            <td class="py-4 px-6 text-white">±0.1mm</td>
+                            <td class="py-4 px-6 text-white">±0.1mm</td>
+                            <td class="py-4 px-6 text-white">±0.1mm</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 spec-row">
+                            <td class="py-4 px-6 text-gray-300">Loading System</td>
+                            <td class="py-4 px-6 text-gray-400">Manual</td>
+                            <td class="py-4 px-6 text-green-400 font-medium">Automatic</td>
+                            <td class="py-4 px-6 text-green-400 font-medium">Rear Auto</td>
+                            <td class="py-4 px-6 text-green-400 font-medium">Automatic</td>
+                            <td class="py-4 px-6 text-green-400 font-medium">Rear Auto</td>
+                            <td class="py-4 px-6 text-green-400 font-medium">Front Auto</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 spec-row">
+                            <td class="py-4 px-6 text-gray-300">Max Speed</td>
+                            <td class="py-4 px-6 text-white">80m/min</td>
+                            <td class="py-4 px-6 text-white">100m/min</td>
+                            <td class="py-4 px-6 text-white font-bold text-primary">120m/min</td>
+                            <td class="py-4 px-6 text-white">100m/min</td>
+                            <td class="py-4 px-6 text-white">110m/min</td>
+                            <td class="py-4 px-6 text-white">70m/min</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 spec-row">
+                            <td class="py-4 px-6 text-gray-300">Saw Blade Diameter</td>
+                            <td class="py-4 px-6 text-white">300mm</td>
+                            <td class="py-4 px-6 text-white">300mm</td>
+                            <td class="py-4 px-6 text-white">350mm</td>
+                            <td class="py-4 px-6 text-white font-bold text-primary">Dual 350mm</td>
+                            <td class="py-4 px-6 text-white font-bold text-primary">380mm</td>
+                            <td class="py-4 px-6 text-white">280mm</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 spec-row">
+                            <td class="py-4 px-6 text-gray-300">Material Types</td>
+                            <td class="py-4 px-6 text-white">MDF/Plywood/Particle</td>
+                            <td class="py-4 px-6 text-white">MDF/Plywood/Particle</td>
+                            <td class="py-4 px-6 text-white">All + Solid Wood</td>
+                            <td class="py-4 px-6 text-white">All Materials</td>
+                            <td class="py-4 px-6 text-white">All + Thick Boards</td>
+                            <td class="py-4 px-6 text-white">MDF/Plywood/Particle</td>
+                        </tr>
+                        <tr class="border-b border-gray-800 spec-row">
+                            <td class="py-4 px-6 text-gray-300">Software</td>
+                            <td class="py-4 px-6 text-white">Standard</td>
+                            <td class="py-4 px-6 text-white">Standard</td>
+                            <td class="py-4 px-6 text-white">Advanced</td>
+                            <td class="py-4 px-6 text-white font-bold text-primary">Smart Optimization</td>
+                            <td class="py-4 px-6 text-white">Advanced</td>
+                            <td class="py-4 px-6 text-white">Basic</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="py-4 px-6 text-gray-300">Ideal For</td>
+                            <td class="py-4 px-6 text-white">Small-Medium Factories</td>
+                            <td class="py-4 px-6 text-white">Cabinet/Wardrobe</td>
+                            <td class="py-4 px-6 text-white">Mass Production</td>
+                            <td class="py-4 px-6 text-white">Large Format</td>
+                            <td class="py-4 px-6 text-white">Heavy Duty 24/7</td>
+                            <td class="py-4 px-6 text-white">Small Workshops</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Recommendations -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Recommendations</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Find Your <span class="text-gradient">Perfect Match</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <div
+                    class="glass-light rounded-2xl p-8 border border-gray-700/30 hover:border-primary/50 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-store text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Small Workshop</h3>
+                    <p class="text-gray-400 text-sm mb-4">Starting out or limited space? The 280C Compact offers
+                        professional cutting in a footprint that fits small facilities.</p>
+                    <div class="flex items-center gap-2 text-primary text-sm font-medium">
+                        <span>Recommended: 280C</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="glass-light rounded-2xl p-8 border border-gray-700/30 hover:border-primary/50 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-industry text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Growing Factory</h3>
+                    <p class="text-gray-400 text-sm mb-4">Scaling production? The AG Standard or 280HG Automatic
+                        will boost your output without breaking the bank.</p>
+                    <div class="flex items-center gap-2 text-secondary text-sm font-medium">
+                        <span>Recommended: 280 / 280HG</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="glass-light rounded-2xl p-8 border border-gray-700/30 hover:border-primary/50 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-warehouse text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Mass Production</h3>
+                    <p class="text-gray-400 text-sm mb-4">High-volume cabinet and wardrobe production? The 330C or 420
+                        models deliver continuous industrial performance.</p>
+                    <div class="flex items-center gap-2 text-purple-400 text-sm font-medium">
+                        <span>Recommended: 330C / 420</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="glass-light rounded-2xl p-8 border border-gray-700/30 hover:border-primary/50 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-red-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-hard-hat text-red-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Heavy-Duty 24/7</h3>
+                    <p class="text-gray-400 text-sm mb-4">Non-stop production environment? The 380 Heavy Duty is built
+                        to run around the clock with minimal maintenance.</p>
+                    <div class="flex items-center gap-2 text-red-400 text-sm font-medium">
+                        <span>Recommended: 380</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="glass-light rounded-2xl p-8 border border-gray-700/30 hover:border-primary/50 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-couch text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Custom Furniture</h3>
+                    <p class="text-gray-400 text-sm mb-4">Unique designs and varied materials? The 420 with dual blades
+                        and smart optimization handles complex cuts effortlessly.</p>
+                    <div class="flex items-center gap-2 text-green-400 text-sm font-medium">
+                        <span>Recommended: 420</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div
+                    class="glass-light rounded-2xl p-8 border border-gray-700/30 hover:border-primary/50 transition-all group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-yellow-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-robot text-yellow-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Smart Factory</h3>
+                    <p class="text-gray-400 text-sm mb-4">Integrating with automated lines? The 330C and 420 models
+                        offer full line integration and Industry 4.0 connectivity.</p>
+                    <div class="flex items-center gap-2 text-yellow-400 text-sm font-medium">
+                        <span>Recommended: 330C / 420</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl">
+        </div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">
+                Not Sure Which Model <span class="text-gradient">Fits You?</span>
+            </h2>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Our experts will analyze your production needs, material types, and budget to recommend the perfect beam
+                saw solution.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" onclick="openQuoteModal(); return false;"
+                    class="group px-8 py-4 bg-gradient-to-r from-secondary to-orange-600 text-white font-bold rounded-xl hover:shadow-xl hover:shadow-secondary/30 transition-all glow-orange flex items-center justify-center gap-2">
+                    <i class="fas fa-comments"></i>
+                    Get Free Consultation
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#"
+                    class="px-8 py-4 glass text-white font-semibold rounded-xl hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    <i class="fas fa-download text-primary"></i>
+                    Download Full Catalog
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-black/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Logo & Social -->
+                <div>
+                    <a href="#" class="flex items-center gap-3 mb-6">
+                        <img src="../static/images/logo.png" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                        <!-- <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div> -->
+                        <div>
+                            <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                            <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span>
+                        </div>
+                    </a>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">PRODUCTS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Furniture CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">CNC
+                                Router</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Laser
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Stone CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Oscillating
+                                Knife Cutting Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Computer Beam
+                                Saw</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Nesting
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Edgebander
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Drilling
+                                Machine</a></li>
+                    </ul>
+                    </ul>
+                </div>
+
+                <!-- About -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">ABOUT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'about' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">About</a>
+                        </li>
+                        <li><a href="{% url 'blog' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">SUPPORT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Technical
+                                Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Spare
+                                Parts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Training</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Warranty</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">CONTACT</h4>
+                    <ul class="space-y-3">
+                        <li class="text-gray-400 text-sm">agequipmentcompany0@gmail.com</li>
+                        <li class="text-gray-400 text-sm">+15042062277</li>
+                        <li class="text-gray-400 text-sm">3401 W Albany Broken Arrow, OK 74012</li>
+                    </ul>
+
+                </div>
+
+                <div class="mt-6">
+                    <h5 class="text-white font-bold mb-3 text-sm">PAYMENT METHOD:</h5>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Letter of
+                            Credit</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>CASH</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>PAYPAL</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Western
+                            Union MoneyGram</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Payment Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Refund Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Shipping Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Return Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Guarantee and
+                            Warranty</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Use</a>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="text-gray-500 text-sm">©2026 All Rights Reserved</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="#"
+        class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 whatsapp-float hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
+    </a>
+
+
+    <!-- Quote Request Modal -->
+    <div id="quote-modal"
+        class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto">
+        <div class="modal-content glass rounded-2xl max-w-2xl w-full mx-4 p-8 relative my-8">
+            <button onclick="closeQuoteModal()"
+                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition-colors z-10">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light mb-4">
+                    <i class="fas fa-file-invoice-dollar text-secondary"></i>
+                    <span class="text-sm text-gray-300">Request Pricing</span>
+                </div>
+                <h2 class="text-3xl font-display font-bold text-white mb-2">Get A <span
+                        class="text-gradient">Quote</span></h2>
+                <p class="text-gray-400 text-sm">Fill out the form below and our sales team will send you pricing,
+                    shipping costs, and delivery time within 24 hours.</p>
+            </div>
+
+            <form id="quote-form" onsubmit="handleQuoteSubmit(event)">
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">Full Name <span
+                                class="text-red-400">*</span></label>
+                        <input type="text" name="name" required placeholder="John Smith"
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">Company Name <span
+                                class="text-red-400">*</span></label>
+                        <input type="text" name="company" required placeholder="Your Company Ltd."
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">Email Address <span
+                                class="text-red-400">*</span></label>
+                        <input type="email" name="email" required placeholder="john@company.com"
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">Phone / WhatsApp <span
+                                class="text-red-400">*</span></label>
+                        <input type="tel" name="phone" required placeholder="+1 234 567 8900"
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">Machine of Interest <span
+                                class="text-red-400">*</span></label>
+                        <select name="machine" id="quote-machine-select" required
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                            <option value="">-- Select a Model --</option>
+                            <option value="ELECNC-280 Standard">ELECNC-280 Standard</option>
+                            <option value="280HG Automatic Loading">280HG Automatic Loading</option>
+                            <option value="330C Rear Feeding">330C Rear Feeding</option>
+                            <option value="420 Large Format">420 Large Format</option>
+                            <option value="380 Heavy Duty">380 Heavy Duty</option>
+                            <option value="280C Compact">280C Compact</option>
+                            <option value="Not Sure / Multiple">Not Sure / Multiple Models</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-2">Quantity Needed</label>
+                        <input type="number" name="quantity" min="1" placeholder="1"
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm text-gray-400 mb-2">Additional Requirements</label>
+                    <textarea name="requirements" rows="4"
+                        placeholder="Describe your production needs, material types, budget range, or any special requirements..."
+                        class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"></textarea>
+                </div>
+
+                <div class="mb-6 p-4 glass-light rounded-xl border border-gray-700/30">
+                    <h4 class="text-sm font-semibold text-white mb-3"><i
+                            class="fas fa-gift text-secondary mr-2"></i>What You Will Receive:</h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-xs"></i>
+                            <span>Machine Price</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-xs"></i>
+                            <span>Shipping Cost</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-xs"></i>
+                            <span>Delivery Time</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-xs"></i>
+                            <span>Payment Terms</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-xs"></i>
+                            <span>Special Discounts</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i class="fas fa-check text-green-400 text-xs"></i>
+                            <span>Technical Support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="w-full py-4 bg-gradient-to-r from-secondary to-orange-600 text-white font-bold rounded-xl hover:shadow-xl hover:shadow-secondary/30 transition-all glow-orange flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Quote Request
+                </button>
+
+                <p class="text-center text-xs text-gray-500 mt-4">
+                    <i class="fas fa-lock mr-1"></i>Your information is secure. We respect your privacy.
+                </p>
+            </form>
+
+            <!-- Success Message (hidden by default) -->
+            <div id="quote-success" class="hidden text-center py-8">
+                <div class="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-check text-green-400 text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Quote Request Sent!</h3>
+                <p class="text-gray-400 mb-6">Thank you for your inquiry. Our sales team will contact you within 24
+                    hours with pricing and shipping details.</p>
+                <div class="glass-light rounded-xl p-4 mb-6 text-left max-w-md mx-auto">
+                    <div class="text-sm text-gray-400 mb-2">What happens next?</div>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fas fa-envelope text-primary text-xs"></i>Quote
+                            sent to your email</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-phone text-primary text-xs"></i>Sales
+                            manager may call to confirm details</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-file-alt text-primary text-xs"></i>Detailed
+                            spec sheet attached</li>
+                    </ul>
+                </div>
+                <button onclick="closeQuoteModal()"
+                    class="px-8 py-3 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-all">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal"
+        class="modal-overlay fixed inset-0 z-[100] flex  justify-center pt-1 bg-black/100 backdrop-blur-sm overflow-y-auto ">
+        <div class="modal-content glass rounded-2xl max-w-4xl w-full  p-8 relative my-8  ">
+            <button onclick="closeProductModal()"
+                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition-colors z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modal-body">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productItems = document.querySelectorAll('.product-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+                productItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+
+        // Quote Modal Functions
+        function openQuoteModal(machineName) {
+            const modal = document.getElementById('quote-modal');
+            const form = document.getElementById('quote-form');
+            const success = document.getElementById('quote-success');
+            const machineSelect = document.getElementById('quote-machine-select');
+
+            // Reset form
+            form.reset();
+            form.classList.remove('hidden');
+            success.classList.add('hidden');
+
+            // Pre-select machine if provided
+            if (machineName) {
+                for (let i = 0; i < machineSelect.options.length; i++) {
+                    if (machineSelect.options[i].value === machineName) {
+                        machineSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quote-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function handleQuoteSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('quote-form');
+            const success = document.getElementById('quote-success');
+
+            // Simulate form submission
+            form.classList.add('hidden');
+            success.classList.remove('hidden');
+
+            // In production, you would send data to server here
+            // const formData = new FormData(form);
+            // fetch('/api/quote-request', { method: 'POST', body: formData });
+        }
+
+        document.getElementById('quote-modal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeQuoteModal();
+        });
+
+        // Product Modal Data
+        const productData = {
+            'entry': {
+                name: 'AG NOVA SI400',
+                category: 'Sliding Table Saw',
+                model: 'SI400',
+                mpn: 'AG-NOVA-SI400',
+                sku: 'AG-NOVA-SI400',
+                slug: 'ag-nova-si400',
+                seoUrl: '/machines/ag-nova-si400/',
+                image: '../static/images/G.jpeg',
+                badge: 'BESTSELLER',
+                badgeColor: 'bg-primary',
+                description: 'The AG Equipment NOVA SI400 delivers precision, performance, and reliability for professional workshops. Built with a heavy-duty sliding table and robust construction, it is designed to elevate your craft with exceptional cutting accuracy.',
+                specs: [
+                    { label: 'Max Cutting Length', value: '3200mm (3800mm optional)' },
+                    { label: 'Cutting Precision', value: '±0.1mm' },
+                    { label: 'Blade Speed', value: '3700 rpm' },
+                    { label: 'Saw Blade Diameter', value: '400mm' },
+                    { label: 'Main Motor Power', value: '7kW' },
+                    { label: 'Scoring Motor', value: '1.3kW' },
+                    { label: 'Working Table Height', value: '900mm' },
+                    { label: 'Max Cutting Height', value: '140mm (90°)' }
+                ],
+                features: [
+                    'Heavy-duty sliding table with precision-engineered components',
+                    'Robust construction and high-quality materials for long-lasting performance',
+                    'Hardened steel guides with sliding bearings for smooth carriage movement',
+                    'Closed-loop cast iron saw unit for vibration-free cutting',
+                    'Manual blade tilt 0-45° with front digital readout',
+                    'Suitable for MDF, plywood, solid wood, and particle board'
+                ]
+            },
+            '280hg': {
+                name: 'AG Automatic Loading',
+                category: 'Automatic Loading',
+                image: '../static/images/m8.webp',
+                badge: 'AUTOMATED',
+                badgeColor: 'bg-green-500',
+                description: 'The 280HG features an automatic front-loading system that reduces labor requirements by 2-3 workers. Perfect for cabinet and wardrobe factories looking to scale production.',
+                specs: [
+                    { label: 'Max Cutting Length', value: '2800mm' },
+                    { label: 'Cutting Precision', value: '±0.1mm' },
+                    { label: 'Max Speed', value: '100m/min' },
+                    { label: 'Saw Blade Diameter', value: '300mm' },
+                    { label: 'Main Motor Power', value: '7.5kW' },
+                    { label: 'Loading System', value: 'Automatic Front' },
+                    { label: 'Stack Height', value: '80mm' },
+                    { label: 'Control System', value: 'PLC + Touch Screen' }
+                ],
+                features: [
+                    'Automatic front-loading platform',
+                    'Pneumatic sheet alignment system',
+                    'Continuous cutting mode',
+                    'Automatic thickness detection',
+                    'Safety light curtains',
+                    'Production data logging'
+                ]
+            },
+            '330c': {
+                name: 'AG Rear Feeding',
+                category: 'Industrial',
+                image: '../static/images/mp2.webp',
+                badge: 'INDUSTRIAL',
+                badgeColor: 'bg-purple-500',
+                description: 'The 330C is designed for high-speed industrial production with a rear feeding automatic system. Line integration ready for smart factory implementations.',
+                specs: [
+                    { label: 'Max Cutting Length', value: '3300mm' },
+                    { label: 'Cutting Precision', value: '±0.1mm' },
+                    { label: 'Max Speed', value: '120m/min' },
+                    { label: 'Saw Blade Diameter', value: '350mm' },
+                    { label: 'Main Motor Power', value: '11kW' },
+                    { label: 'Feeding System', value: 'Rear Automatic' },
+                    { label: 'Line Integration', value: 'Industry 4.0 Ready' },
+                    { label: 'Software', value: 'Advanced Optimization' }
+                ],
+                features: [
+                    'Rear feeding automatic system',
+                    'High-speed continuous cutting',
+                    'Line integration capability',
+                    'Advanced optimization software',
+                    'Remote diagnostics support',
+                    'Heavy-duty frame construction'
+                ]
+            },
+            '420': {
+                name: '420 Large Format',
+                category: 'Premium',
+                image: '../static/images/D.png',
+                badge: 'PREMIUM',
+                badgeColor: 'bg-primary',
+                description: 'The 420 is our flagship model featuring a dual saw blade system and smart optimization software. Handles large format panels up to 4200mm with maximum efficiency.',
+                specs: [
+                    { label: 'Max Cutting Length', value: '4200mm' },
+                    { label: 'Cutting Precision', value: '±0.1mm' },
+                    { label: 'Max Speed', value: '100m/min' },
+                    { label: 'Saw Blade', value: 'Dual 350mm System' },
+                    { label: 'Main Motor Power', value: '15kW' },
+                    { label: 'Software', value: 'Smart Optimization AI' },
+                    { label: 'Panel Thickness', value: '2-80mm' },
+                    { label: 'Interface', value: '21" Touch Screen' }
+                ],
+                features: [
+                    'Dual saw blade simultaneous cutting',
+                    'AI-powered material optimization',
+                    'Automatic defect detection',
+                    'Barcode scanning integration',
+                    'Cloud-based production analytics',
+                    'Automatic blade wear compensation'
+                ]
+            },
+            '380': {
+                name: 'AG Equipment T-Glide',
+                category: 'Heavy Duty',
+                image: '../static/images/T.png',
+                badge: 'HEAVY DUTY',
+                badgeColor: 'bg-red-500',
+                description: 'Heavy-duty industrial sliding table saw with a 380 mm saw blade, engineered for continuous 24/7 production and precision cutting.',
+                specs: [
+                    { label: 'Max Cutting Length', value: '3800mm' },
+                    { label: 'Cutting Precision', value: '±0.1mm' },
+                    { label: 'Max Speed', value: '110m/min' },
+                    { label: 'Saw Blade Diameter', value: '380mm' },
+                    { label: 'Main Motor Power', value: '18.5kW' },
+                    { label: 'Construction', value: 'Heavy Duty Cast Iron' },
+                    { label: 'Cooling System', value: 'Automatic Liquid' },
+                    { label: 'Warranty', value: '3 Years Full' }
+                ],
+                features: [
+                    '380mm heavy-duty saw blade',
+                    'Cast iron frame construction',
+                    'Automatic cooling system',
+                    'Vibration dampening technology',
+                    '3-year full warranty',
+                    '24/7 operation certified'
+                ]
+            },
+            '280c': {
+                name: 'AG Equipment Fixed Shaper',
+                category: 'Compact',
+                image: '../static/images/compact.jpeg',
+                badge: 'COMPACT',
+                badgeColor: 'bg-yellow-500',
+                description: '11 HP, 3-Phase Motor (220 V) | Reverse Spindle Rotation with Electrical Interlock',
+                specs: [
+                    { label: 'Max Cutting Length', value: '1200 × 730 mm Precision' },
+                    { label: 'Cutting Precision', value: '±0.1mm' },
+                    { label: '5 spindle speed', value: '3000 / 4500 / 6000 / 7000 / 10000 rpm' },
+                    { label: 'Saw Blade Diameter', value: '280mm' },
+                    { label: 'Main Motor Power', value: '4kW' },
+                    { label: 'Footprint', value: 'Compact 3.2m x 2.1m' },
+                    { label: 'Weight', value: '1800kg' },
+                    { label: 'Power', value: '380V/50Hz' }
+                ],
+                features: [
+                    'Compact 3.2m x 2.1m footprint',
+                    'Front-loading system',
+                    'Ideal for small workshops',
+                    'Easy installation and setup',
+                    'Low power consumption',
+                    'Mobile base optional'
+                ]
+            }
+        };
+
+        function openProductModal(productId) {
+            const data = productData[productId];
+            const modal = document.getElementById('product-modal');
+            const body = document.getElementById('modal-body');
+
+            body.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-8 ">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="${data.image}" alt="${data.name}" class="w-full h-80 object-cover">
+                        <div class="absolute top-4 left-4 px-3 py-1 ${data.badgeColor}/90 text-white text-xs font-bold rounded-full">${data.badge}</div>
+                    </div>
+                    <div>
+                        <span class="text-primary text-sm font-semibold uppercase tracking-wider">${data.category}</span>
+                        <h2 class="text-3xl font-display font-bold text-white mt-2 mb-3">${data.name}</h2>
+                        ${data.mpn ? `
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-semibold">Model: ${data.model}</span>
+                            <span class="px-3 py-1 rounded-full bg-secondary/10 border border-secondary/30 text-secondary text-xs font-semibold">MPN: ${data.mpn}</span>
+                        </div>` : ''}
+                        <p class="text-gray-400 mb-6">${data.description}</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            ${data.specs.slice(0, 4).map(spec => `
+                                <div class="glass-light rounded-lg p-3">
+                                    <div class="text-xs text-gray-400 mb-1">${spec.label}</div>
+                                    <div class="text-sm font-bold text-white">${spec.value}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="closeProductModal(); setTimeout(() => openQuoteModal('${data.name}'), 350);" class="flex-1 py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                <i class="fas fa-paper-plane mr-2"></i>Get Quote
+                            </button>
+                            ${data.seoUrl ? `
+                            <a href="${data.seoUrl}" class="flex-1 py-3 border border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all text-center">
+                                <i class="fas fa-external-link-alt mr-2"></i>View Full Machine Page
+                            </a>` : ''}
+                            <button class="px-4 py-3 border border-gray-600 rounded-lg text-gray-300 hover:border-primary hover:text-primary transition-all">
+                                <i class="fas fa-download"></i> Spec Sheet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-4">Technical Specifications</h3>
+                        <div class="space-y-2">
+                            ${data.specs.map(spec => `
+                                <div class="spec-row flex justify-between py-3 px-4 rounded-lg border-b border-gray-800">
+                                    <span class="text-gray-400 text-sm">${spec.label}</span>
+                                    <span class="text-white font-medium text-sm">${spec.value}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-4">Key Features</h3>
+                        <ul class="space-y-3">
+                            ${data.features.map(feature => `
+                                <li class="flex items-start gap-3 text-gray-300 text-sm">
+                                    <i class="fas fa-check-circle text-primary mt-0.5"></i>
+                                    <span>${feature}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('product-modal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeProductModal();
+        });
+
+        // MPN / Model Number Search
+        const mpnSearchForm = document.getElementById('mpn-search-form');
+        const mpnSearchInput = document.getElementById('mpn-search-input');
+        const mpnSearchMessage = document.getElementById('mpn-search-message');
+
+        // Add additional machines here as they receive official MPNs.
+        const machineMpnIndex = [
+            {
+                name: 'AG NOVA SI400',
+                model: 'SI400',
+                mpn: 'AG-NOVA-SI400',
+                url: '/machines/ag-nova-si400/'
+            }
+        ];
+
+        function normalizeMachineSearch(value) {
+            return value
+                .trim()
+                .toLowerCase()
+                .replace(/[\s_]+/g, '-')
+                .replace(/[^a-z0-9-]/g, '');
+        }
+
+        function searchMachineByMpn(value) {
+            const normalized = normalizeMachineSearch(value);
+            return machineMpnIndex.find(machine => {
+                const candidates = [
+                    machine.name,
+                    machine.model,
+                    machine.mpn,
+                    machine.name.replace(/\s+/g, '-'),
+                    machine.mpn.replace(/-/g, '')
+                ].map(normalizeMachineSearch);
+
+                return candidates.some(candidate => candidate === normalized || candidate.includes(normalized) || normalized.includes(candidate));
+            });
+        }
+
+        mpnSearchForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const value = mpnSearchInput.value;
+            const machine = searchMachineByMpn(value);
+
+            mpnSearchMessage.classList.remove('hidden');
+
+            if (!value.trim()) {
+                mpnSearchMessage.className = 'text-sm mt-3 text-center text-yellow-400';
+                mpnSearchMessage.textContent = 'Please enter a model number or MPN.';
+                return;
+            }
+
+            if (machine) {
+                mpnSearchMessage.className = 'text-sm mt-3 text-center text-green-400';
+                mpnSearchMessage.textContent = `Machine found: ${machine.name}. Opening machine page...`;
+                window.location.href = machine.url;
+                return;
+            }
+
+            mpnSearchMessage.className = 'text-sm mt-3 text-center text-red-400';
+            mpnSearchMessage.textContent = 'No machine was found for that model number or MPN.';
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "AG Equipment CNC Machines",
+        "url": "http://127.0.0.1:8000/product/",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "AG NOVA SI400",
+                "url": "http://127.0.0.1:8000/machines/ag-nova-si400/"
+            }
+        ]
+    }
+    </script>
+
+</body>
+
+</html>

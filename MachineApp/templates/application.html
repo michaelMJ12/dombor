@@ -1,0 +1,1079 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - DOMBOR Global CNC Beam Saws</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#f97316',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'slide-left': 'slideLeft 30s linear infinite',
+                        'slide-right': 'slideRight 35s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideLeft: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #0ea5e9; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0284c7; }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-light {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0ea5e9, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glow {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3), 0 0 40px rgba(14, 165, 233, 0.1);
+        }
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1);
+        }
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #f97316);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .app-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .app-card:hover {
+            transform: translateY(-15px);
+            z-index: 50;
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
+        }
+        .app-card:hover .app-img { transform: scale(1.1); }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .material-card { transition: all 0.4s ease; }
+        .material-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(14, 165, 233, 0.5);
+        }
+        .process-step { position: relative; }
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #f97316);
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        .process-step:last-child::after { display: none; }
+        @media (max-width: 768px) {
+            .process-step::after { display: none; }
+        }
+        .case-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .case-card:hover { transform: translateY(-10px); }
+        .case-card:hover .case-img { transform: scale(1.05); }
+        .whatsapp-float { animation: float 3s ease-in-out infinite; }
+        .industry-card { transition: all 0.4s ease; }
+        .industry-card:hover { border-color: rgba(14, 165, 233, 0.5); }
+        .industry-card:hover .industry-icon { transform: scale(1.1); }
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+    </style>
+<!-- <base target="_blank"> -->
+</head>
+
+<body class="bg-darker text-white font-sans overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="{% url 'home' %}" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                        <img src="{% static 'images/logo.png' %}" alt="Saw Logo" class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                    </div>
+                    <div>
+                        <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                        <!-- <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span> -->
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="{% url 'home' %}" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="{% url 'products' %}" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Products</a>
+                    <a href="{% url 'application' %}" class="nav-link text-sm font-medium text-white transition-colors">Applications</a>
+                    <a href="{% url 'about' %}" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="{% url 'story' %}" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Stories</a>
+                    <a href="{% url 'blog' %}" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Blog</a>
+                    <a href="{% url 'contact' %}" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-4">
+                    <button class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <a href="{% url 'quote' %}" class="px-6 py-2.5 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all glow">Get A Quote</a>
+                    <button class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-5 h-auto rounded-sm">
+                        <span class="text-sm">English</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden glass">
+            <div class="px-4 py-6 space-y-4">
+                <a href="{% url 'home' %}" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="{% url 'products' %}" class="block text-gray-300 hover:text-white py-2">Products</a>
+                <a href="{% url 'application' %}" class="block text-white font-semibold py-2">Applications</a>
+                <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2">About</a>
+                <a href="{% url 'story' %}" class="block text-gray-300 hover:text-white py-2">Stories</a>
+                <a href="{% url 'contact' %}" class="block text-gray-300 hover:text-white py-2">Contact</a>
+                <a href="{% url 'quote' %}" class="block mt-4 px-6 py-3 bg-gradient-to-r from-primary to-blue-600 text-white text-center font-semibold rounded-lg">Get A Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark via-darker to-darker"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light mb-6">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">Trusted by 9,000+ Global Customers</span>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+                    <span class="text-white">Industry</span><br>
+                    <span class="text-gradient">Applications</span>
+                </h1>
+
+                <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                    From custom furniture workshops to mass production factories, our computer beam saws deliver precision cutting solutions across diverse industries worldwide.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-couch text-primary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">Furniture</div>
+                            <div class="text-xs text-gray-400">Production</div>
+                        </div>
+                    </div>
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-warehouse text-secondary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">Cabinet</div>
+                            <div class="text-xs text-gray-400">Manufacturing</div>
+                        </div>
+                    </div>
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-door-open text-primary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">Door & Window</div>
+                            <div class="text-xs text-gray-400">Processing</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries We Serve -->
+    <section id="industries" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Industries</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">Industries We <span class="text-gradient">Serve</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Our computer beam saws are trusted across multiple industries for their precision, speed, and reliability.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="industry-grid">
+                <!-- Furniture Manufacturing -->
+                <div class="industry-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col reveal">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="{% static 'images/G.jpeg' %}" alt="Furniture Manufacturing" class="app-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 bg-primary/90 text-white text-xs font-bold rounded-full">FURNITURE</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3">Furniture Manufacturing</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">From custom sofas to modular office systems, our beam saws handle all furniture panel cutting with plusmn;0.1mm precision. Ideal for both small workshops and large-scale production.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Sofa & chair frame cutting</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Table & desk panel processing</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Office furniture systems</li>
+                        </ul>
+                        <button onclick="openIndustryModal('furniture')" class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"><i class="fas fa-eye mr-2"></i>View Details</button>
+                    </div>
+                </div>
+
+                <!-- Cabinet & Wardrobe -->
+                <div class="industry-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col reveal">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="{% static 'images/m8.webp' %}" alt="Cabinet Manufacturing" class="app-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full">CABINET</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3">Cabinet & Wardrobe</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">Specialized cutting solutions for kitchen cabinets, wardrobes, and storage systems. Automatic loading options reduce labor by 2-3 workers while maintaining perfect edge quality.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Kitchen cabinet panels</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Wardrobe & closet systems</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Bathroom vanity units</li>
+                        </ul>
+                        <button onclick="openIndustryModal('cabinet')" class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"><i class="fas fa-eye mr-2"></i>View Details</button>
+                    </div>
+                </div>
+
+                <!-- Mass Production -->
+                <div class="industry-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col reveal">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="{% static 'images/mp2.webp' %}" alt="Mass Production" class="app-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 bg-purple-500/90 text-white text-xs font-bold rounded-full">MASS PROD</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3">Mass Production</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">High-speed continuous cutting for large-volume furniture factories. Line integration ready with Industry 4.0 connectivity for smart factory implementations.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>24/7 continuous operation</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Automated production lines</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Smart factory integration</li>
+                        </ul>
+                        <button onclick="openIndustryModal('mass')" class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"><i class="fas fa-eye mr-2"></i>View Details</button>
+                    </div>
+                </div>
+
+                <!-- Door & Window -->
+                <div class="industry-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col reveal">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="{% static 'images/D.png' %}" alt="Door and Window" class="app-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 bg-red-500/90 text-white text-xs font-bold rounded-full">DOOR/WINDOW</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3">Door & Window Processing</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">Precision cutting for door frames, window sashes, and architectural millwork. Handles solid wood and composite materials with equal accuracy.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Interior & exterior doors</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Window frame components</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Architectural millwork</li>
+                        </ul>
+                        <button onclick="openIndustryModal('door')" class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"><i class="fas fa-eye mr-2"></i>View Details</button>
+                    </div>
+                </div>
+
+                <!-- Custom Workshop -->
+                <div class="industry-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col reveal">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="{% static 'images/T.png' %}" alt="Custom Workshop" class="app-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 bg-yellow-500/90 text-white text-xs font-bold rounded-full">WORKSHOP</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3">Custom Workshop</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">Compact and versatile solutions for custom furniture makers and small workshops. Easy setup and operation with professional-grade results.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Bespoke furniture making</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Small batch production</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Prototype development</li>
+                        </ul>
+                        <button onclick="openIndustryModal('workshop')" class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"><i class="fas fa-eye mr-2"></i>View Details</button>
+                    </div>
+                </div>
+
+                <!-- Export Manufacturing -->
+                <div class="industry-card glass-light rounded-2xl overflow-hidden border border-gray-700/50 h-full flex flex-col reveal">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="{% static 'images/compact.jpeg' %}" alt="Export Manufacturing" class="app-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 px-3 py-1 bg-cyan-500/90 text-white text-xs font-bold rounded-full">EXPORT</div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3">Export Manufacturing</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">CE/FDA/ISO certified machines meeting international standards. Full documentation and compliance support for hassle-free import and installation.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>International compliance</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Export packaging & shipping</li>
+                            <li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>Multi-language support</li>
+                        </ul>
+                        <button onclick="openIndustryModal('export')" class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"><i class="fas fa-eye mr-2"></i>View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materials We Cut -->
+    <section id="materials" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Materials</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">Materials We <span class="text-gradient">Cut</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Our beam saws handle a wide range of materials with precision and consistency.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
+                <div class="material-card glass-light rounded-2xl p-6 border border-gray-700/30 text-center">
+                    <div class="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-layer-group text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">MDF</h3>
+                    <p class="text-sm text-gray-400">Medium Density Fiberboard</p>
+                    <div class="mt-4 text-xs text-gray-500">Thickness: 2-80mm</div>
+                </div>
+                <div class="material-card glass-light rounded-2xl p-6 border border-gray-700/30 text-center">
+                    <div class="w-16 h-16 rounded-xl bg-secondary/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-th text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Plywood</h3>
+                    <p class="text-sm text-gray-400">Multi-layer Wood Panels</p>
+                    <div class="mt-4 text-xs text-gray-500">Thickness: 3-50mm</div>
+                </div>
+                <div class="material-card glass-light rounded-2xl p-6 border border-gray-700/30 text-center">
+                    <div class="w-16 h-16 rounded-xl bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-cubes text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Particle Board</h3>
+                    <p class="text-sm text-gray-400">Chipboard & OSB</p>
+                    <div class="mt-4 text-xs text-gray-500">Thickness: 8-45mm</div>
+                </div>
+                <div class="material-card glass-light rounded-2xl p-6 border border-gray-700/30 text-center">
+                    <div class="w-16 h-16 rounded-xl bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tree text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Solid Wood</h3>
+                    <p class="text-sm text-gray-400">Hardwood & Softwood</p>
+                    <div class="mt-4 text-xs text-gray-500">Thickness: 5-100mm</div>
+                </div>
+            </div>
+
+            <div class="mt-12 glass-light rounded-2xl p-8 border border-gray-700/30 reveal">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-primary mb-2">plusmn;0.1mm</div>
+                        <div class="text-sm text-gray-400">Cutting Precision</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-secondary mb-2">2-100mm</div>
+                        <div class="text-sm text-gray-400">Material Thickness Range</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-primary mb-2">99.8%</div>
+                        <div class="text-sm text-gray-400">Material Utilization</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Workflow -->
+    <section id="process" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Workflow</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">Our <span class="text-gradient">Process</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">From design to delivery, we ensure seamless integration of our beam saws into your production line.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
+                <div class="process-step relative text-center">
+                    <div class="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-blue-600/20 flex items-center justify-center mx-auto mb-6 border border-primary/30">
+                        <span class="text-2xl font-bold text-primary">01</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Consultation</h3>
+                    <p class="text-sm text-gray-400">We analyze your production needs, material types, and budget to recommend the perfect beam saw model.</p>
+                </div>
+                <div class="process-step relative text-center">
+                    <div class="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-secondary/20 to-orange-600/20 flex items-center justify-center mx-auto mb-6 border border-secondary/30">
+                        <span class="text-2xl font-bold text-secondary">02</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Customization</h3>
+                    <p class="text-sm text-gray-400">Tailored configuration including blade selection, software setup, and optional automation features.</p>
+                </div>
+                <div class="process-step relative text-center">
+                    <div class="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mx-auto mb-6 border border-green-500/30">
+                        <span class="text-2xl font-bold text-green-400">03</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Installation</h3>
+                    <p class="text-sm text-gray-400">On-site installation and commissioning by our expert technicians with full operator training.</p>
+                </div>
+                <div class="process-step relative text-center">
+                    <div class="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-purple-500/20 to-violet-600/20 flex items-center justify-center mx-auto mb-6 border border-purple-500/30">
+                        <span class="text-2xl font-bold text-purple-400">04</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Support</h3>
+                    <p class="text-sm text-gray-400">24/7 technical support, remote diagnostics, and on-site maintenance for uninterrupted production.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section id="cases" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Success Stories</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">Customer <span class="text-gradient">Case Studies</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Real results from real customers across the globe.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+                <div class="case-card glass-light rounded-2xl overflow-hidden border border-gray-700/50">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Italian Customer" class="case-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex items-center gap-2">
+                            <img src="https://flagcdn.com/w40/it.png" alt="Italy" class="w-8 h-auto rounded shadow-lg">
+                            <span class="text-white font-bold">ITALY</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Custom Furniture Workshop</h3>
+                        <p class="text-sm text-gray-400 mb-4">"The ELECNC-280 transformed our small workshop. We now handle 3x the orders with the same team."</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center"><i class="fas fa-user text-primary text-xs"></i></div>
+                                <span class="text-primary text-sm font-medium">Marco R.</span>
+                            </div>
+                            <span class="text-xs text-gray-500">Milan, Italy</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-700/50 flex items-center justify-between text-sm">
+                            <span class="text-gray-400">Results:</span>
+                            <span class="text-green-400 font-semibold">+200% Output</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card glass-light rounded-2xl overflow-hidden border border-gray-700/50">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" alt="US Customer" class="case-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex items-center gap-2">
+                            <img src="https://flagcdn.com/w40/us.png" alt="USA" class="w-8 h-auto rounded shadow-lg">
+                            <span class="text-white font-bold">USA</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Cabinet Manufacturing Plant</h3>
+                        <p class="text-sm text-gray-400 mb-4">"The 280HG automatic loading system cut our labor costs by 40%. Best investment we have made."</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center"><i class="fas fa-user text-primary text-xs"></i></div>
+                                <span class="text-primary text-sm font-medium">John D.</span>
+                            </div>
+                            <span class="text-xs text-gray-500">Texas, USA</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-700/50 flex items-center justify-between text-sm">
+                            <span class="text-gray-400">Results:</span>
+                            <span class="text-green-400 font-semibold">-40% Labor Cost</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card glass-light rounded-2xl overflow-hidden border border-gray-700/50">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80" alt="Saudi Customer" class="case-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex items-center gap-2">
+                            <img src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia" class="w-8 h-auto rounded shadow-lg">
+                            <span class="text-white font-bold">SAUDI ARABIA</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Mass Production Factory</h3>
+                        <p class="text-sm text-gray-400 mb-4">"The 420 model handles our 24/7 production schedule flawlessly. Precision is unmatched."</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center"><i class="fas fa-user text-primary text-xs"></i></div>
+                                <span class="text-primary text-sm font-medium">Ahmed K.</span>
+                            </div>
+                            <span class="text-xs text-gray-500">Riyadh, KSA</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-700/50 flex items-center justify-between text-sm">
+                            <span class="text-gray-400">Results:</span>
+                            <span class="text-green-400 font-semibold">24/7 Operation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Reach -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Global Presence</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">Serving <span class="text-gradient">80+ Countries</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Our machines are running in factories across six continents, delivering precision cutting solutions worldwide.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 reveal">
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/us.png" alt="USA" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">USA</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/it.png" alt="Italy" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Italy</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Saudi Arabia</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/de.png" alt="Germany" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Germany</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/au.png" alt="Australia" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Australia</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/br.png" alt="Brazil" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Brazil</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/ru.png" alt="Russia" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Russia</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/in.png" alt="India" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">India</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/mx.png" alt="Mexico" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Mexico</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/tr.png" alt="Turkey" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Turkey</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/za.png" alt="South Africa" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">South Africa</span>
+                </div>
+                <div class="glass-light rounded-xl p-4 text-center border border-gray-700/30">
+                    <img src="https://flagcdn.com/w40/id.png" alt="Indonesia" class="w-10 h-auto rounded mx-auto mb-2">
+                    <span class="text-sm text-gray-300">Indonesia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Ready to Transform <span class="text-gradient">Your Production?</span></h2>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Get a free consultation and discover how our computer beam saws can optimize your manufacturing process.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'quote' %}" class="group px-8 py-4 bg-gradient-to-r from-secondary to-orange-600 text-white font-bold rounded-xl hover:shadow-xl hover:shadow-secondary/30 transition-all glow-orange flex items-center justify-center gap-2">
+                    <i class="fas fa-comments"></i>
+                    Get Free Consultation
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="{% url 'products' %}" class="px-8 py-4 glass text-white font-semibold rounded-xl hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    <i class="fas fa-search text-primary"></i>
+                    View Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-black/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Logo & Social -->
+                <div>
+                    <a href="#" class="flex items-center gap-3 mb-6">
+                        <img src="../static/images/logo.png" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                        <!-- <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div> -->
+                        <div>
+                            <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                            <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span>
+                        </div>
+                    </a>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">PRODUCTS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Furniture CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">CNC
+                                Router</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Laser
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Stone CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Oscillating
+                                Knife Cutting Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Computer Beam
+                                Saw</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Nesting
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Edgebander
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Drilling
+                                Machine</a></li>
+                    </ul>
+                    </ul>
+                </div>
+
+                <!-- About -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">ABOUT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'about' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">About</a>
+                        </li>
+                        <li><a href="{% url 'blog' %}"
+                                class="text-gray-400 hover:text-primary transition-colors text-sm">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">SUPPORT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Technical
+                                Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Spare
+                                Parts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Training</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Warranty</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">CONTACT</h4>
+                    <ul class="space-y-3">
+                        <li class="text-gray-400 text-sm">agequipmentcompany0@gmail.com</li>
+                        <li class="text-gray-400 text-sm">+15042062277</li>
+                        <li class="text-gray-400 text-sm">3401 W Albany Broken Arrow, OK 74012</li>
+                    </ul>
+
+                </div>
+
+                <div class="mt-6">
+                    <h5 class="text-white font-bold mb-3 text-sm">PAYMENT METHOD:</h5>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Letter of
+                            Credit</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>CASH</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>PAYPAL</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Western
+                            Union MoneyGram</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Payment Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Refund Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Shipping Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Return Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Guarantee and
+                            Warranty</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Use</a>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="text-gray-500 text-sm">©2026 All Rights Reserved</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="#" class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 whatsapp-float hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
+    </a>
+
+    <!-- Industry Detail Modal -->
+    <div id="industry-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
+        <div class="modal-content glass rounded-2xl max-w-4xl w-full p-8 relative my-8">
+            <button onclick="closeIndustryModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition-colors z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="industry-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass');
+            } else {
+                navbar.classList.remove('glass');
+            }
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Industry Modal Data
+        const industryData = {
+            furniture: {
+                title: 'Furniture Manufacturing',
+                image: '../static/images/G.jpeg',
+                description: 'Our computer beam saws are the backbone of modern furniture manufacturing. From cutting panels for sofas and chairs to processing table tops and desk surfaces, we provide solutions that scale with your business.',
+                applications: [
+                    'Residential furniture production',
+                    'Office furniture systems',
+                    'Hotel and hospitality furniture',
+                    'Outdoor and garden furniture',
+                    'Children furniture manufacturing'
+                ],
+                benefits: [
+                    'plusmn;0.1mm cutting precision ensures perfect joints',
+                    'Handle batch sizes from 1 to 10,000+ units',
+                    'Quick changeover between different designs',
+                    'Reduce material waste by up to 15%'
+                ],
+                recommended: 'ELECNC-280 Standard, 280HG Automatic Loading'
+            },
+            cabinet: {
+                title: 'Cabinet & Wardrobe Manufacturing',
+                image: '../static/images/m8.webp',
+                description: 'Specialized cutting solutions for kitchen cabinets, wardrobes, and storage systems. Our automatic loading options dramatically reduce labor requirements while maintaining the precision needed for perfect assembly.',
+                applications: [
+                    'Kitchen cabinet carcasses and doors',
+                    'Wardrobe and closet systems',
+                    'Bathroom vanity units',
+                    'Storage cabinet production',
+                    'Display and retail fixtures'
+                ],
+                benefits: [
+                    'Automatic loading reduces labor by 2-3 workers',
+                    'Consistent cut quality ensures perfect assembly',
+                    'Handle melamine, laminate, and veneer panels',
+                    'High-speed processing for large orders'
+                ],
+                recommended: '280HG Automatic Loading, 330C Rear Feeding'
+            },
+            mass: {
+                title: 'Mass Production',
+                image: '../static/images/mp2.webp',
+                description: 'Built for continuous operation, our industrial beam saws handle the demands of mass production environments. Line integration capabilities allow seamless connection to your existing production workflow.',
+                applications: [
+                    'High-volume furniture factories',
+                    'Flat-pack furniture production',
+                    'Component manufacturing',
+                    'OEM production lines',
+                    'Export manufacturing'
+                ],
+                benefits: [
+                    '24/7 continuous operation capability',
+                    'Industry 4.0 ready with smart connectivity',
+                    'Remote diagnostics and monitoring',
+                    'Automatic optimization reduces waste'
+                ],
+                recommended: '330C Rear Feeding, 420 Large Format'
+            },
+            door: {
+                title: 'Door & Window Processing',
+                image: '../static/images/D.png',
+                description: 'Precision cutting for door frames, window sashes, and architectural millwork. Our heavy-duty models handle solid wood and composite materials with the accuracy required for weather-tight assemblies.',
+                applications: [
+                    'Interior door production',
+                    'Exterior door manufacturing',
+                    'Window frame components',
+                    'Architectural millwork',
+                    'Custom door shops'
+                ],
+                benefits: [
+                    'Handle solid wood up to 100mm thick',
+                    'Precision for weather-tight assemblies',
+                    'Scoring blade for chip-free cuts',
+                    'Heavy-duty construction for continuous use'
+                ],
+                recommended: '420 Large Format, 380 Heavy Duty'
+            },
+            workshop: {
+                title: 'Custom Workshop',
+                image: '../static/images/T.png',
+                description: 'Compact and versatile solutions for custom furniture makers and small workshops. Easy setup and operation mean you can start producing professional-grade work from day one.',
+                applications: [
+                    'Bespoke furniture making',
+                    'Small batch production',
+                    'Prototype development',
+                    'Restoration projects',
+                    'Artisan woodworking'
+                ],
+                benefits: [
+                    'Compact footprint fits small workshops',
+                    'Easy to learn and operate',
+                    'Professional results without the learning curve',
+                    'Affordable entry point to CNC cutting'
+                ],
+                recommended: 'ELECNC-280 Standard, 280C Compact'
+            },
+            export: {
+                title: 'Export Manufacturing',
+                image: '../static/images/compact.png',
+                description: 'CE/FDA/ISO certified machines meeting international standards. Full documentation and compliance support for hassle-free import and installation in any country.',
+                applications: [
+                    'Export-oriented furniture factories',
+                    'International project suppliers',
+                    'Multi-national production facilities',
+                    'OEM export manufacturers',
+                    'Global retail suppliers'
+                ],
+                benefits: [
+                    'CE/FDA/ISO certified for global markets',
+                    'Full export documentation provided',
+                    'Multi-language software interfaces',
+                    'Global service network support'
+                ],
+                recommended: 'All models available for export'
+            }
+        };
+
+        function openIndustryModal(industry) {
+            const data = industryData[industry];
+            const modal = document.getElementById('industry-modal');
+            const body = document.getElementById('industry-modal-body');
+
+            body.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="${data.image}" alt="${data.title}" class="w-full h-80 object-cover">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-display font-bold text-white mb-4">${data.title}</h2>
+                        <p class="text-gray-400 mb-6">${data.description}</p>
+
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-white mb-3">Key Applications</h3>
+                            <ul class="space-y-2">
+                                ${data.applications.map(app => `<li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check text-primary text-xs"></i>${app}</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-white mb-3">Benefits</h3>
+                            <ul class="space-y-2">
+                                ${data.benefits.map(benefit => `<li class="flex items-center gap-2 text-sm text-gray-300"><i class="fas fa-check-circle text-green-400 text-xs"></i>${benefit}</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="glass-light rounded-xl p-4 border border-gray-700/30">
+                            <span class="text-sm text-gray-400">Recommended Models:</span>
+                            <span class="text-primary font-semibold ml-2">${data.recommended}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeIndustryModal() {
+            document.getElementById('industry-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('industry-modal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeIndustryModal();
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stories - DOMBOR Global CNC Beam Saws</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#f97316',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'slide-left': 'slideLeft 30s linear infinite',
+                        'slide-right': 'slideRight 35s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideLeft: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-light {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #0ea5e9, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3), 0 0 40px rgba(14, 165, 233, 0.1);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #f97316);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .story-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .story-card:hover {
+            transform: translateY(-15px);
+            z-index: 50;
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
+        }
+
+        .story-card:hover .story-img {
+            transform: scale(1.1);
+        }
+
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .whatsapp-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            border-color: transparent;
+        }
+
+        .play-btn {
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.5);
+        }
+
+        .customer-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .customer-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            z-index: 50;
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
+        }
+
+        .infinite-track {
+            display: flex;
+            width: max-content;
+        }
+
+        .infinite-track:hover {
+            animation-play-state: paused;
+        }
+
+        .video-card {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .video-card.active-card {
+            transform: scale(1.08) !important;
+            z-index: 50;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+<!-- <base target="_blank"> -->
+</head>
+
+<body class="bg-darker text-white font-sans overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="{% url 'home' %}" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                        <img src="{% static 'images/logo.png' %}" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                    </div>
+                    <div>
+                        <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                        <!-- <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span> -->
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="{% url 'home' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="{% url 'products' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Products</a>
+                    <a href="{% url 'application' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Applications</a>
+                    <a href="{% url 'about' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="{% url 'feedback' %}"
+                        class="nav-link text-sm font-medium text-white transition-colors">Stories</a>
+                    <a href="{% url 'blog' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Blog</a>
+                    <a href="{% url 'contact' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-4">
+                    <button class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <a href="{% url 'quote' %}"
+                        class="px-6 py-2.5 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all glow">
+                        Get A Quote
+                    </a>
+                    <button class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-5 h-auto rounded-sm">
+                        <span class="text-sm">English</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden glass">
+            <div class="px-4 py-6 space-y-4">
+                <a href="{% url 'home' %}" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="{% url 'products' %}" class="block text-gray-300 hover:text-white py-2">Products</a>
+                <a href="{% url 'application' %}" class="block text-gray-300 hover:text-white py-2">Applications</a>
+                <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2">About</a>
+                <a href="{% url 'feedback' %}" class="block text-white py-2">Stories</a>
+                <a href="{% url 'blog' %}" class="block text-gray-300 hover:text-white py-2">Blog</a>
+                <a href="{% url 'contact' %}" class="block text-gray-300 hover:text-white py-2">Contact</a>
+                <a href="{% url 'quote' %}"
+                    class="block mt-4 px-6 py-3 bg-gradient-to-r from-primary to-blue-600 text-white text-center font-semibold rounded-lg">Get
+                    A Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark via-darker to-darker"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light mb-6">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">Trusted by 9,000+ Global Customers</span>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+                    <span class="text-white">Customer</span><br>
+                    <span class="text-gradient">Success Stories</span>
+                </h1>
+
+                <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Discover how furniture manufacturers around the world transformed their production with our CNC beam saw solutions. Real results, real businesses, real impact.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-users text-primary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">9,000+</div>
+                            <div class="text-xs text-gray-400">Happy Customers</div>
+                        </div>
+                    </div>
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-globe text-secondary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">80+</div>
+                            <div class="text-xs text-gray-400">Countries Served</div>
+                        </div>
+                    </div>
+                    <div class="glass-light rounded-xl px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-star text-primary"></i>
+                        <div class="text-left">
+                            <div class="text-sm font-bold text-white">4.9/5</div>
+                            <div class="text-xs text-gray-400">Average Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-8 sticky top-20 z-40 bg-darker/90 backdrop-blur-md border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-center gap-3 reveal">
+                <button class="filter-btn active px-6 py-2 rounded-full border border-gray-700 text-sm font-medium"
+                    data-filter="all">All Stories</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 hover:text-white text-sm font-medium"
+                    data-filter="cabinet">Cabinet Making</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 hover:text-white text-sm font-medium"
+                    data-filter="wardrobe">Wardrobe Production</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 hover:text-white text-sm font-medium"
+                    data-filter="mass">Mass Production</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 hover:text-white text-sm font-medium"
+                    data-filter="custom">Custom Furniture</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Video Stories - Infinite Slider -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Video Stories</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Watch <span class="text-gradient">Customer Stories</span> in Action
+                </h2>
+                <p class="text-gray-400">See how our beam saws transformed production floors worldwide</p>
+            </div>
+
+            <div class="overflow-hidden rounded-2xl">
+                <div class="infinite-track animate-slide-right" id="video-track">
+                    {% for item in query_set %}
+                    <div class="video-card flex-shrink-0 w-96 mx-4 group cursor-pointer">
+                        <div class="relative rounded-2xl overflow-hidden">
+                            <video id="video-{{ item.id }}"
+                                class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                                preload="metadata">
+                                <source src="{{ item.video.url }}" type="video/mp4">
+                            </video>
+                            <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
+                            <button onclick="toggleVideo('{{ item.id }}')"
+                                class="absolute inset-0 flex items-center justify-center z-20">
+                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i id="icon-{{ item.id }}" class="fas fa-play text-white text-xl ml-1"></i>
+                                </div>
+                            </button>
+                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent pointer-events-none">
+                                <span class="text-3xl font-display font-bold text-primary">{{ item.title }}</span>
+                                <p class="text-white font-medium">{{ item.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Stories - Masonry Grid -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Testimonials</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    <span class="text-gradient">Customer Feedback</span>
+                </h2>
+                <div class="flex items-center justify-center gap-2 text-gray-400">
+                    <i class="fas fa-phone-alt text-primary"></i>
+                    <span>Contact us now | Get Real Customer Cases in Your Area!</span>
+                </div>
+            </div>
+
+            <div class="masonry-grid reveal" id="customer-grid">
+                <!-- Italian Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="custom" onclick="openCustomerModal('italian')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80"
+                                alt="Italian Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/it.png" alt="Italy" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">ITALIAN</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"It Was A Great Amazing Experience"</p>
+                            <p class="text-sm text-gray-400 italic">"It was a great pleasure to visit DomBor Global. DomBor Global has an outstanding team and extensive expertise in machinery. A fantastic experience overall!"</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Italy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- US Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="mass" onclick="openCustomerModal('us')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80"
+                                alt="US Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/us.png" alt="USA" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">US</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Definitely We Will Be DomBor Global Customers Again"</p>
+                            <p class="text-sm text-gray-400 italic">"Actually we are using that machine for two years and we have a very good experience with it. They have very professional salesteam and customer service. Definitely we will be their customers again."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from USA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saudi Arabian Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="cabinet" onclick="openCustomerModal('saudi')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80"
+                                alt="Saudi Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">SAUDI ARABIAN</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Professional Service, Perfect Machine"</p>
+                            <p class="text-sm text-gray-400 italic">"Our after-sales technical team provided on-site installation and technical training for our Saudi Arabian customer. They are highly satisfied with both our six-sided CNC drilling machine and our professional service."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Saudi Arabia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Germany Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="wardrobe" onclick="openCustomerModal('germany')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-60 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80"
+                                alt="Germany Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/de.png" alt="Germany" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">GERMANY</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Precision That Exceeds German Standards"</p>
+                            <p class="text-sm text-gray-400 italic">"As a German manufacturer, we demand the highest precision. The 420 Large Format beam saw delivers ±0.1mm accuracy consistently. Our wardrobe production line efficiency increased by 40% within the first month."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Germany</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brazil Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="mass" onclick="openCustomerModal('brazil')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80"
+                                alt="Brazil Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/br.png" alt="Brazil" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">BRAZIL</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Doubled Our Production Capacity"</p>
+                            <p class="text-sm text-gray-400 italic">"We installed the 280HG Automatic Loading system and doubled our daily output. The automatic loading reduced our labor costs significantly. Best investment for our mass production facility."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Brazil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Australia Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="custom" onclick="openCustomerModal('australia')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80"
+                                alt="Australia Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/au.png" alt="Australia" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">AUSTRALIA</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Custom Furniture Made Easy"</p>
+                            <p class="text-sm text-gray-400 italic">"Our custom furniture workshop needed flexibility and precision. The ELECNC-280 handles everything from MDF to solid wood with the same accuracy. Customer satisfaction is at an all-time high."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Australia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Turkey Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="cabinet" onclick="openCustomerModal('turkey')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80"
+                                alt="Turkey Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/tr.png" alt="Turkey" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">TURKEY</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Seamless Integration, Outstanding Results"</p>
+                            <p class="text-sm text-gray-400 italic">"The 330C Rear Feeding system integrated perfectly with our existing cabinet production line. Setup was smooth and the team provided excellent remote support throughout the process."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Turkey</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nigeria Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="wardrobe" onclick="openCustomerModal('nigeria')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80"
+                                alt="Nigeria Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/ng.png" alt="Nigeria" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">NIGERIA</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Growing Our Business with DomBor Global"</p>
+                            <p class="text-sm text-gray-400 italic">"Starting with one machine, we now run three 280HG units for our wardrobe factory. The reliability and 24/7 support from DomBor Global have been crucial to our growth across West Africa."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Nigeria</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- India Customer -->
+                <div class="masonry-item customer-card cursor-pointer story-item" data-category="mass" onclick="openCustomerModal('india')">
+                    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-50 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80"
+                                alt="India Customer"
+                                class="story-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/in.png" alt="India" class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">INDIA</span>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Best Value for Money in the Market"</p>
+                            <p class="text-sm text-gray-400 italic">"After comparing multiple brands, DomBor Global offered the best combination of price, quality, and support. The 380 Heavy Duty runs 24/7 in our facility without any issues. Highly recommended!"</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from India</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Impact</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Real Results <span class="text-gradient">Worldwide</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
+                <div class="glass-light rounded-2xl p-8 text-center border border-gray-700/30 hover:border-primary/50 transition-all">
+                    <div class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-arrow-up text-primary text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-display font-bold text-white mb-2">50%</div>
+                    <div class="text-sm text-gray-400">Average Production Increase</div>
+                </div>
+                <div class="glass-light rounded-2xl p-8 text-center border border-gray-700/30 hover:border-secondary/50 transition-all">
+                    <div class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users-slash text-secondary text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-display font-bold text-white mb-2">-60%</div>
+                    <div class="text-sm text-gray-400">Labor Cost Reduction</div>
+                </div>
+                <div class="glass-light rounded-2xl p-8 text-center border border-gray-700/30 hover:border-primary/50 transition-all">
+                    <div class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bullseye text-green-400 text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-display font-bold text-white mb-2">±0.1mm</div>
+                    <div class="text-sm text-gray-400">Consistent Precision</div>
+                </div>
+                <div class="glass-light rounded-2xl p-8 text-center border border-gray-700/30 hover:border-secondary/50 transition-all">
+                    <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-clock text-purple-400 text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-display font-bold text-white mb-2">24/7</div>
+                    <div class="text-sm text-gray-400">Operation Ready</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">
+                Ready to Write <span class="text-gradient">Your Story?</span>
+            </h2>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Join thousands of satisfied customers worldwide. Let us help you transform your furniture production with precision CNC beam saw technology.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'quote' %}"
+                    class="group px-8 py-4 bg-gradient-to-r from-secondary to-orange-600 text-white font-bold rounded-xl hover:shadow-xl hover:shadow-secondary/30 transition-all glow-orange flex items-center justify-center gap-2">
+                    <i class="fas fa-comments"></i>
+                    Get Free Quote
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="{% url 'products' %}"
+                    class="px-8 py-4 glass text-white font-semibold rounded-xl hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    <i class="fas fa-search text-primary"></i>
+                    Explore Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-black/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Logo & Social -->
+                <div>
+                    <a href="#" class="flex items-center gap-3 mb-6">
+                        <img src="../static/images/logo.png" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                        <!-- <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div> -->
+                        <div>
+                            <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                            <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span>
+                        </div>
+                    </a>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">PRODUCTS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Furniture CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC
+                                Router</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Laser
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Stone CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Oscillating
+                                Knife Cutting Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Computer Beam
+                                Saw</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Nesting
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Edgebander
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Drilling
+                                Machine</a></li>
+                    </ul>
+                    </ul>
+                </div>
+
+                <!-- About -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">ABOUT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'about' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">About</a>
+                        </li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">SUPPORT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Technical
+                                Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Spare
+                                Parts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Training</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Warranty</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">CONTACT</h4>
+                    <ul class="space-y-3">
+                        <li class="text-gray-400 text-sm">agequipmentcompany0@gmail.com</li>
+                        <li class="text-gray-400 text-sm">+15042062277</li>
+                        <li class="text-gray-400 text-sm">3401 W Albany Broken Arrow, OK 74012</li>
+                    </ul>
+
+                </div>
+
+                <div class="mt-6">
+                    <h5 class="text-white font-bold mb-3 text-sm">PAYMENT METHOD:</h5>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Letter of
+                            Credit</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>CASH</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>PAYPAL</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Western
+                            Union MoneyGram</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Payment Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Refund Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Shipping Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Return Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Guarantee and
+                            Warranty</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Use</a>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="text-gray-500 text-sm">©2026 All Rights Reserved</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="#" class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 whatsapp-float hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
+    </a>
+
+    <!-- Customer Modal -->
+    <div id="customer-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="modal-content glass rounded-2xl max-w-2xl w-full p-8 relative">
+            <button onclick="closeCustomerModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modal-body" class="text-center">
+                <!-- Content will be injected by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass');
+            } else {
+                navbar.classList.remove('glass');
+            }
+        });
+
+        // Video Toggle
+        function toggleVideo(id) {
+            const video = document.getElementById("video-" + id);
+            const icon = document.getElementById("icon-" + id);
+            const card = video.closest(".video-card");
+
+            document.querySelectorAll("video").forEach(v => {
+                if (v.id !== "video-" + id) {
+                    v.pause();
+                    v.closest(".video-card").classList.remove("active-card");
+                }
+            });
+
+            if (video.paused) {
+                video.play();
+                icon.classList.remove("fa-play");
+                icon.classList.add("fa-pause");
+                card.classList.add("active-card");
+            } else {
+                video.pause();
+                icon.classList.remove("fa-pause");
+                icon.classList.add("fa-play");
+                card.classList.remove("active-card");
+            }
+
+            video.onended = () => {
+                icon.classList.remove("fa-pause");
+                icon.classList.add("fa-play");
+                card.classList.remove("active-card");
+            };
+        }
+
+        // Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const storyItems = document.querySelectorAll('.story-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+                storyItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Customer Modal Data
+        const customerData = {
+            italian: {
+                flag: 'https://flagcdn.com/w80/it.png',
+                country: 'Italian Customer',
+                title: 'It Was A Great Amazing Experience',
+                quote: '"It was a great pleasure to visit DomBor Global. DomBor Global has an outstanding team and extensive expertise in machinery. A fantastic experience overall!"',
+                rating: 5,
+                industry: 'Custom Furniture',
+                machine: 'ELECNC-280 Standard',
+                result: 'Increased production efficiency by 35%'
+            },
+            us: {
+                flag: 'https://flagcdn.com/w80/us.png',
+                country: 'US Customer',
+                title: 'Definitely We Will Be DomBor Global Customers Again',
+                quote: '"Actually we are using that machine for two years and we have a very good experience with it. They have very professional salesteam and customer service. Definitely we will be their customers again."',
+                rating: 5,
+                industry: 'Mass Production',
+                machine: '420 Large Format',
+                result: 'Doubled daily output capacity'
+            },
+            saudi: {
+                flag: 'https://flagcdn.com/w80/sa.png',
+                country: 'Saudi Arabian Customer',
+                title: 'Professional Service, Perfect Machine',
+                quote: '"Our after-sales technical team provided on-site installation and technical training for our Saudi Arabian customer. They are highly satisfied with both our six-sided CNC drilling machine and our professional service."',
+                rating: 5,
+                industry: 'Cabinet Making',
+                machine: '330C Rear Feeding',
+                result: 'Seamless production line integration'
+            },
+            germany: {
+                flag: 'https://flagcdn.com/w80/de.png',
+                country: 'German Customer',
+                title: 'Precision That Exceeds German Standards',
+                quote: '"As a German manufacturer, we demand the highest precision. The 420 Large Format beam saw delivers ±0.1mm accuracy consistently. Our wardrobe production line efficiency increased by 40% within the first month."',
+                rating: 5,
+                industry: 'Wardrobe Production',
+                machine: '420 Large Format',
+                result: '40% efficiency increase in first month'
+            },
+            brazil: {
+                flag: 'https://flagcdn.com/w80/br.png',
+                country: 'Brazilian Customer',
+                title: 'Doubled Our Production Capacity',
+                quote: '"We installed the 280HG Automatic Loading system and doubled our daily output. The automatic loading reduced our labor costs significantly. Best investment for our mass production facility."',
+                rating: 5,
+                industry: 'Mass Production',
+                machine: '280HG Automatic Loading',
+                result: '100% increase in daily output'
+            },
+            australia: {
+                flag: 'https://flagcdn.com/w80/au.png',
+                country: 'Australian Customer',
+                title: 'Custom Furniture Made Easy',
+                quote: '"Our custom furniture workshop needed flexibility and precision. The ELECNC-280 handles everything from MDF to solid wood with the same accuracy. Customer satisfaction is at an all-time high."',
+                rating: 5,
+                industry: 'Custom Furniture',
+                machine: 'ELECNC-280 Standard',
+                result: 'Highest customer satisfaction ratings'
+            },
+            turkey: {
+                flag: 'https://flagcdn.com/w80/tr.png',
+                country: 'Turkish Customer',
+                title: 'Seamless Integration, Outstanding Results',
+                quote: '"The 330C Rear Feeding system integrated perfectly with our existing cabinet production line. Setup was smooth and the team provided excellent remote support throughout the process."',
+                rating: 5,
+                industry: 'Cabinet Making',
+                machine: '330C Rear Feeding',
+                result: 'Perfect line integration achieved'
+            },
+            nigeria: {
+                flag: 'https://flagcdn.com/w80/ng.png',
+                country: 'Nigerian Customer',
+                title: 'Growing Our Business with DomBor Global',
+                quote: '"Starting with one machine, we now run three 280HG units for our wardrobe factory. The reliability and 24/7 support from DomBor Global have been crucial to our growth across West Africa."',
+                rating: 5,
+                industry: 'Wardrobe Production',
+                machine: '280HG Automatic Loading',
+                result: 'Scaled from 1 to 3 machines'
+            },
+            india: {
+                flag: 'https://flagcdn.com/w80/in.png',
+                country: 'Indian Customer',
+                title: 'Best Value for Money in the Market',
+                quote: '"After comparing multiple brands, DomBor Global offered the best combination of price, quality, and support. The 380 Heavy Duty runs 24/7 in our facility without any issues. Highly recommended!"',
+                rating: 5,
+                industry: 'Mass Production',
+                machine: '380 Heavy Duty',
+                result: '24/7 continuous operation'
+            }
+        };
+
+        function openCustomerModal(customer) {
+            const data = customerData[customer];
+            const modal = document.getElementById('customer-modal');
+            const body = document.getElementById('modal-body');
+
+            body.innerHTML = `
+                <img src="${data.flag}" alt="${data.country}" class="w-20 h-auto rounded-lg mx-auto mb-4 shadow-2xl">
+                <h3 class="text-2xl font-display font-bold text-white mb-2">${data.country}</h3>
+                <p class="text-primary font-semibold mb-4">${data.title}</p>
+                <div class="flex justify-center gap-1 mb-4">
+                    ${Array(data.rating).fill('<i class="fas fa-star text-yellow-400"></i>').join('')}
+                </div>
+                <p class="text-gray-300 italic mb-6">${data.quote}</p>
+                <div class="glass-light rounded-xl p-4 mb-6 text-left max-w-md mx-auto">
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <div class="text-gray-400 text-xs">Industry</div>
+                            <div class="text-white font-medium">${data.industry}</div>
+                        </div>
+                        <div>
+                            <div class="text-gray-400 text-xs">Machine</div>
+                            <div class="text-white font-medium">${data.machine}</div>
+                        </div>
+                        <div class="col-span-2">
+                            <div class="text-gray-400 text-xs">Result</div>
+                            <div class="text-primary font-medium">${data.result}</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="px-8 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-play mr-2"></i>Watch Video
+                </button>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCustomerModal() {
+            document.getElementById('customer-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        document.getElementById('customer-modal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeCustomerModal();
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

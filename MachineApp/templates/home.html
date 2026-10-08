@@ -1,0 +1,2134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomBor Global CNC - High-Efficiency Computer Beam Saws</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#f97316',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    },
+                    animation: {
+                        'slide-left': 'slideLeft 30s linear infinite',
+                        'slide-right': 'slideRight 35s linear infinite',
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        slideLeft: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 8s ease-out;
+            transform: scale(1.1);
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        .infinite-track {
+            display: flex;
+            width: max-content;
+        }
+
+        .infinite-track:hover {
+            animation-play-state: paused;
+        }
+
+        .customer-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .customer-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            z-index: 50;
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-light {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3), 0 0 40px rgba(14, 165, 233, 0.1);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 40px rgba(249, 115, 22, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #0ea5e9, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #particles-canvas {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #f97316);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .feature-card {
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(14, 165, 233, 0.5);
+        }
+
+        .manufacturing-img {
+            transition: all 0.5s ease;
+            filter: grayscale(30%);
+        }
+
+        .manufacturing-img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .whatsapp-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .play-btn {
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.5);
+        }
+
+        .progress-bar {
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #f97316);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+    </style>
+    <!-- <base target="_blank"> -->
+    <style>
+        .video-card {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        /* ACTIVE (PLAYING) STATE */
+        .video-card.active-card {
+            transform: scale(1.08) !important;
+            z-index: 50;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* OPTIONAL: pause animation container if using marquee/slider */
+        .paused-slider {
+            animation-play-state: paused !important;
+        }
+    </style>
+</head>
+
+<body class="bg-darker text-white font-sans overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+
+                        <img src="../static/images/logo.png" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                    </div>
+                    <div>
+                        <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                        <!-- <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span> -->
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="{% url 'home' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="{% url 'products' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Products</a>
+                    <a href="{% url 'application' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Applications</a>
+                    <a href="{% url 'about' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="{% url 'story' %}"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Stories</a>
+                    <a href="blog"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Blog</a>
+                    <a href="contact"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-4">
+                    <button class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <a href="#quote"
+                        class="px-6 py-2.5 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all glow">
+                        Get A Quote
+                    </a>
+                    <button class="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-5 h-auto rounded-sm">
+                        <span class="text-sm">English</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden glass">
+            <div class="px-4 py-6 space-y-4">
+                <a href="{% url 'home' %}" class="block text-gray-300 hover:text-white py-2">Home</a>
+                <a href="{% url 'products' %}" class="block text-gray-300 hover:text-white py-2">Products</a>
+                <a href="{% url 'application' %}" class="block text-gray-300 hover:text-white py-2">Applications</a>
+                <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2">About</a>
+                <a href="{% url 'story' %}" class="block text-gray-300 hover:text-white py-2">Stories</a>
+                <a href="{% url 'contact' %}" class="block text-gray-300 hover:text-white py-2">Contact</a>
+                <a href="quote"
+                    class="block mt-4 px-6 py-3 bg-gradient-to-r from-primary to-blue-600 text-white text-center font-semibold rounded-lg">Get
+                    A Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Infinite Background Slider -->
+    <section id="home" class="hero-slider">
+        <div class="hero-slide active">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80" alt="CNC Factory">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-darker"></div>
+        </div>
+        <!-- Slide 2: Modern CNC Beam Saw (Clean White Background) -->
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80" alt="CNC Factory">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-darker"></div>
+        </div>
+
+        <!-- Slide 3: Industrial Beam Saw in Factory -->
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80" alt="CNC Factory">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-darker"></div>
+        </div>
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=1920&q=80" alt="Precision">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-darker"></div>
+        </div>
+
+        <canvas id="particles-canvas"></canvas>
+
+        <div class="relative z-20 h-full flex items-center justify-center px-4">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light mb-8 reveal">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-gray-300">Trusted by 9,000+ Global Customers</span>
+                </div>
+
+                <h1 class="text-4xl md:text-3xl lg:text-3xl font-display font-bold mb-6 leading-tight reveal">
+                    <span class="text-white">Computer Machine Beam Saw</span><br>
+                    <span class="text-gradient">for Modern Furniture</span><br>
+                    <span class="text-white">Factories</span>
+                </h1>
+
+                <!-- <p class="text-lg md:text-xl text-gray-300 mb-4 max-w-2xl mx-auto reveal">
+                    High-speed, high-precision panel cutting system
+                </p>
+                <p class="text-base text-gray-400 mb-10 max-w-xl mx-auto reveal">
+                    Designed for cabinet, wardrobe, and mass furniture production with cutting accuracy of ±0.1mm
+                </p> -->
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+                    <a href="#quote"
+                        class="group px-8 py-4 bg-gradient-to-r from-secondary to-orange-600 text-white font-bold rounded-xl hover:shadow-xl hover:shadow-secondary/30 transition-all glow-orange flex items-center justify-center gap-2">
+                        <i class="fas fa-comments"></i>
+                        Get Free Quote
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#video"
+                        class="px-8 py-4 glass text-white font-semibold rounded-xl hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-play-circle text-primary"></i>
+                        Watch Demo
+                    </a>
+                </div>
+
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto reveal">
+                    <div class="glass-light rounded-xl p-4">
+                        <div class="text-3xl font-bold text-primary">16+</div>
+                        <div class="text-xs text-gray-400 mt-1">Years Experience</div>
+                    </div>
+                    <div class="glass-light rounded-xl p-4">
+                        <div class="text-3xl font-bold text-secondary">9K+</div>
+                        <div class="text-xs text-gray-400 mt-1">Happy Customers</div>
+                    </div>
+                    <div class="glass-light rounded-xl p-4">
+                        <div class="text-3xl font-bold text-primary">80+</div>
+                        <div class="text-xs text-gray-400 mt-1">Countries Served</div>
+                    </div>
+                    <div class="glass-light rounded-xl p-4">
+                        <div class="text-3xl font-bold text-secondary">5K+</div>
+                        <div class="text-xs text-gray-400 mt-1">Units/Year</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+            <button class="slide-dot w-12 h-1 rounded-full bg-white/30 transition-all" data-slide="0"></button>
+            <button class="slide-dot w-12 h-1 rounded-full bg-white/30 transition-all" data-slide="1"></button>
+            <button class="slide-dot w-12 h-1 rounded-full bg-white/30 transition-all" data-slide="2"></button>
+            <button class="slide-dot w-12 h-1 rounded-full bg-white/30 transition-all" data-slide="3"></button>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 z-20">
+            <div id="hero-progress" class="progress-bar"></div>
+        </div>
+    </section>
+
+    <!-- Choose the Right Computer Beam Saw - Infinite Product Slider -->
+    <section id="products" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Our Lineup</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Choose the Right <span class="text-gradient">Computer Beam Saw</span><br>for Your Factory
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">From entry-level to fully automated systems, find the perfect
+                    cutting solution for your production needs</p>
+            </div>
+
+            <div class="overflow-hidden">
+                <div class="infinite-track animate-slide-left" id="product-track">
+                    <!-- Product 1 -->
+                    <div class="flex-shrink-0 w-80 mx-4">
+                        <div
+                            class="product-card bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-2xl overflow-hidden border border-gray-700/50 glow">
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="../static/images/mp1.webp" alt="Entry-Level Beam Saw"
+                                    class="product-img w-full h-full object-cover transition-transform duration-500">
+                                <div
+                                    class="absolute top-4 left-4 px-3 py-1 bg-primary/90 text-white text-xs font-bold rounded-full">
+                                    PANEL SAW MACHINE</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-2">Entry-Level AG Equipment Beam Saw</h3>
+                                <p class="text-sm text-gray-400 mb-1">Standard Model</p>
+                                <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Max cutting length:
+                                        2800mm-4200mm</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Suitable: MDF / Plywood /
+                                        Particle Board</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Ideal for medium
+                                        furniture factories</li>
+                                </ul>
+                                <button
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-search mr-2"></i>Get Quote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="flex-shrink-0 w-80 mx-4">
+                        <div
+                            class="product-card bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-2xl overflow-hidden border border-gray-700/50">
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="../static/images/m8.webp"
+                                    class="product-img w-full h-full object-cover transition-transform duration-500">
+                                <div
+                                    class="absolute top-4 left-4 px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full">
+                                    PANEL SAW MACHINE</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-2">AG Equipment Loading Computer Beam Saw
+                                </h3>
+                                <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Automatic loading system
+                                    </li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>High-speed continuous
+                                        cutting</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Perfect for cabinet &
+                                        wardrobe factories</li>
+                                </ul>
+                                <button
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-search mr-2"></i>Get Quote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="flex-shrink-0 w-80 mx-4">
+                        <div
+                            class="product-card bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-2xl overflow-hidden border border-gray-700/50">
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="../static/images/mp2.webp"
+                                    class="product-img w-full h-full object-cover transition-transform duration-500">
+                                <div
+                                    class="absolute top-4 left-4 px-3 py-1 bg-purple-500/90 text-white text-xs font-bold rounded-full">
+                                    PANEL SAW MACHINE</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-2">AG Equipment Computer Beam Saw</h3>
+                                <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Rear feeding automatic
+                                        system</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>High-speed industrial
+                                        cutting</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Line integration ready
+                                    </li>
+                                </ul>
+                                <button
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-search mr-2"></i>Get Quote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="flex-shrink-0 w-80 mx-4">
+                        <div
+                            class="product-card bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-2xl overflow-hidden border border-gray-700/50 glow">
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="../static/images/D.png"
+                                    class="product-img w-full h-full object-cover transition-transform duration-500">
+                                <div
+                                    class="absolute top-4 left-4 px-3 py-1 bg-primary/90 text-white text-xs font-bold rounded-full">
+                                    PREMIUM</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-2">AG Equipment Beam Saw</h3>
+                                <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Large format cutting up
+                                        to 4200mm</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Dual saw blade system
+                                    </li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Smart optimization
+                                        software</li>
+                                </ul>
+                                <button
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-search mr-2"></i>Get Quote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="flex-shrink-0 w-80 mx-4">
+                        <div
+                            class="product-card bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-2xl overflow-hidden border border-gray-700/50">
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="../static/images/T.png"
+                                    class="product-img w-full h-full object-cover transition-transform duration-500">
+                                <div
+                                    class="absolute top-4 left-4 px-3 py-1 bg-red-500/90 text-white text-xs font-bold rounded-full">
+                                    HEAVY DUTY CYCLE</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-2">AG Equipment T-Glide</h3>
+                                <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Precision | Stability | efficiency </i>
+                                    </li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>36” rip capacity &
+                                        T-Glide Fence Assembly | 69 1/4″ w x 36 1/2″ d x 34″ h
+                                    </li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>3HP,1PH 230V
+                                    </li>
+                                </ul>
+                                <button
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-search mr-2"></i>Get Quote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="flex-shrink-0 w-80 mx-4">
+                        <div
+                            class="product-card bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-2xl overflow-hidden border border-gray-700/50">
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="../static/images/compact.jpeg"
+                                    class="product-img w-full h-full object-cover transition-transform duration-500">
+                                <div
+                                    class="absolute top-4 left-4 px-3 py-1 bg-yellow-500/90 text-white text-xs font-bold rounded-full">
+                                    COMPACT</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-2">AG Equipment Fixed Shaper</h3>
+                                <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>11 HP, 3-phase motor
+                                        (220V) | Reverse spindle rotation with electrical interlocking for reverse
+                                        operation
+                                    </li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>5 spindle speed: 3000 /
+                                        4500 / 6000 / 7000 / 10000 rpm</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Manual spindle lifting,
+                                        complete with mechanical readout of spindle height
+                                    </li>
+                                </ul>
+                                <button
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-search mr-2"></i>Get Quote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Duplicates for infinite loop -->
+                    <div class="flex-shrink-0 w-80 mx-4">
+                        <div
+                            class="product-card bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-2xl overflow-hidden border border-gray-700/50 glow">
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="../static/images/G.jpeg"
+                                    class="product-img w-full h-full object-cover transition-transform duration-500">
+                                <div
+                                    class="absolute top-4 left-4 px-3 py-1 bg-primary/90 text-white text-xs font-bold rounded-full">
+                                    BESTSELLER</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-2">AG Equipment</h3>
+                                <p class="text-sm text-gray-400 mb-1">AG Equipment NOVA SI400</p>
+                                <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>4.52" Blade</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i> 7 kW (~9.5 HP) main Motor |~0.75–1.3 kW (~1–1.7 HP) scoring Motor</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Sliding Table Saw</li>
+                                </ul>
+                                <button
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-search mr-2"></i>Get Quote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-shrink-0 w-80 mx-4">
+                        <div
+                            class="product-card bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-2xl overflow-hidden border border-gray-700/50">
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="../static/images/JW1.jpeg"
+                                    class="product-img w-full h-full object-cover transition-transform duration-500">
+                                <div
+                                    class="absolute top-4 left-4 px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full">
+                                    AUTOMATED</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-2">AG Equipment, 18" Bandsaw 1.75HP 1PH 115V
+                                    JT1-549
+                                </h3>
+                                <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>AG Equipment, 18" Bandsaw 1.75 HP 1PH 115 V JT1-549
+                                                   Powerful 1.75 HP Motor
+                                    </li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Safety Foot Brake |
+                                        User-Friendly Adjustments</li>
+                                    <li class="flex items-start gap-2"><i
+                                            class="fas fa-check text-primary text-xs mt-1"></i>Blade Tracking Window |
+                                        Effective Dust Collection</li>
+                                </ul>
+                                <button
+                                    class="w-full py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-search mr-2"></i>Get Quote
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Watch Beam Saws in Action - Video Section -->
+    <section id="video" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker to-dark"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Demonstrations</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Watch <span class="text-gradient">Beam Saws</span> in Action
+                </h2>
+                <p class="text-gray-400">Upgrade to Automated CNC Beam Saw & Enhance Your Factory's Efficiency!</p>
+            </div>
+
+            <div class="overflow-hidden rounded-2xl">
+                <div class="infinite-track animate-slide-right" id="video-track">
+
+                    {% for item in query_set %}
+                    <div class="video-card flex-shrink-0 w-96 mx-4 group cursor-pointer">
+
+                        <div class="relative rounded-2xl overflow-hidden">
+
+                            <!-- VIDEO -->
+                            <video id="video-{{ item.id }}"
+                                class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                                preload="metadata">
+
+                                <source src="{{ item.video.url }}" type="video/mp4">
+                            </video>
+
+                            <!-- DARK OVERLAY -->
+                            <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
+
+                            <!-- PLAY BUTTON -->
+                            <button onclick="toggleVideo('{{ item.id }}')"
+                                class="absolute inset-0 flex items-center justify-center z-20">
+
+                                <div
+                                    class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i id="icon-{{ item.id }}" class="fas fa-play text-white text-xl ml-1"></i>
+                                </div>
+
+                            </button>
+
+                            <!-- TEXT -->
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent pointer-events-none">
+
+                                <span class="text-3xl font-display font-bold text-primary">
+                                    {{ item.title }}
+                                </span>
+
+                                <p class="text-white font-medium">
+                                    {{ item.description }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                    <!-- <div class="flex-shrink-0 w-96 mx-4 group cursor-pointer">
+                        <div class="relative rounded-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=80"
+                                alt="420 Beam Saw"
+                                class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="play-btn w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white text-xl ml-1"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-3xl font-display font-bold text-secondary">420</span>
+                                </div>
+                                <p class="text-white font-medium">Computer Beam Saw</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-shrink-0 w-96 mx-4 group cursor-pointer">
+                        <div class="relative rounded-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80"
+                                alt="380 Panel Saw"
+                                class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="play-btn w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white text-xl ml-1"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-3xl font-display font-bold text-primary">380</span>
+                                </div>
+                                <p class="text-white font-medium">Rear Feeding Computer Panel Saw</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-shrink-0 w-96 mx-4 group cursor-pointer">
+                        <div class="relative rounded-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=800&q=80"
+                                alt="280 Loading"
+                                class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="play-btn w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white text-xl ml-1"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-3xl font-display font-bold text-secondary">280</span>
+                                </div>
+                                <p class="text-white font-medium">Loading Computer Beam Saw</p>
+                            </div>
+                        </div>
+                    </div>
+
+                  
+                    <div class="flex-shrink-0 w-96 mx-4 group cursor-pointer">
+                        <div class="relative rounded-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80"
+                                alt="ELECNC-280"
+                                class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="play-btn w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white text-xl ml-1"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-3xl font-display font-bold text-primary">ELECNC-280</span>
+                                </div>
+                                <p class="text-white font-medium">Intelligent Computer Beam Saw</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-shrink-0 w-96 mx-4 group cursor-pointer">
+                        <div class="relative rounded-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=80"
+                                alt="420 Beam Saw"
+                                class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="play-btn w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white text-xl ml-1"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-3xl font-display font-bold text-secondary">420</span>
+                                </div>
+                                <p class="text-white font-medium">Computer Beam Saw</p>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Complete Woodworking Solutions - Masonry Grid -->
+    <section id="applications" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Complete Solutions</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Complete <span class="text-gradient">Woodworking Machine Solutions</span><br>for Furniture
+                    Production
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto mb-8">Enhance your automated production line with our
+                    high-efficiency woodworking machines.</p>
+                <a href="#"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-secondary to-orange-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-download"></i>
+                    Request Product Catalog
+                </a>
+            </div>
+
+            <div class="masonry-grid reveal">
+                <div class="masonry-item group">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-primary/50 transition-all">
+                        <div class="relative overflow-hidden">
+                            <img src="../static/images/mp1.webp" alt="CNC Nesting Machine"
+                                class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-layer-group text-primary text-sm"></i>
+                                </div>
+                                <h3 class="text-white font-semibold">AG Equipment Computer Beam Saw</h3>
+                            </div>
+                            <p class="text-sm text-gray-400">Maximum Cutting Length: 2800–4200 mm
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-primary/50 transition-all">
+                        <div class="relative overflow-hidden">
+                            <img src="../static/images/m8.webp" alt="Edgebander Machine"
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-8 h-8 rounded-lg bg-secondary/20 flex items-center justify-center">
+                                    <i class="fas fa-border-all text-secondary text-sm"></i>
+                                </div>
+                                <h3 class="text-white font-semibold">AG Equipment Loading Computer Beam Saw</h3>
+                            </div>
+                            <p class="text-sm text-gray-400">High-Speed Continuous Panel Cutting
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-primary/50 transition-all">
+                        <div class="relative overflow-hidden">
+                            <img src="../static/images/mp2.webp" alt="Six-Sided CNC Drilling"
+                                class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                    <i class="fas fa-cube text-purple-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-white font-semibold">AG Equipment Rear Feeding Computer Beam Saw</h3>
+                            </div>
+                            <p class="text-sm text-gray-400">Rear feeding automatic system</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-primary/50 transition-all">
+                        <div class="relative overflow-hidden">
+                            <img src="../static/images/D.png" alt="Sliding Table Saw"
+                                class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
+                                    <i class="fas fa-arrows-alt-h text-green-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-white font-semibold">AG Equipment Computer Beam Saw</h3>
+                            </div>
+                            <p class="text-sm text-gray-400">Large format cutting upto 4200mm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-primary/50 transition-all">
+                        <div class="relative overflow-hidden">
+                            <img src="../static/images/T.png" alt="Door Lock Hole Machine"
+                                class="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-8 h-8 rounded-lg bg-yellow-500/20 flex items-center justify-center">
+                                    <i class="fas fa-door-open text-yellow-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-white font-semibold">AG Equipment T-Glide</h3>
+                            </div>
+                            <p class="text-sm text-gray-400">Precision | Stability | Efficiency</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-primary/50 transition-all">
+                        <div class="relative overflow-hidden">
+                            <img src="../static/images/compact.jpeg" alt="Wood CNC Router"
+                                class="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center">
+                                    <i class="fas fa-route text-red-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-white font-semibold">AG Equipment Fixed Shaper</h3>
+                            </div>
+                            <p class="text-sm text-gray-400">11 HP, 3-Phase Motor (220 V) | Reverse Spindle Rotation with Electrical Interlock</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-primary/50 transition-all">
+                        <div class="relative overflow-hidden">
+                            <img src="../static/images/G.jpeg" alt="5 Axis CNC Router"
+                                class="w-full h-50 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-8 h-8 rounded-lg bg-pink-500/20 flex items-center justify-center">
+                                    <i class="fas fa-cubes text-pink-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-white font-semibold">AG Equipment - 12' Front Load</h3>
+                            </div>
+                            <p class="text-sm text-gray-400">30 HP Main Saw Motor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-primary/50 transition-all">
+                        <div class="relative overflow-hidden">
+                            <img src="../static/images/JW1.jpeg" alt="Corrugated Box Maker"
+                                class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                                    <i class="fas fa-box text-cyan-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-white font-semibold">AG Equipment, 18" Bandsaw 1.75HP 1PH 115V JT1-549
+                                </h3>
+                            </div>
+                            <p class="text-sm text-gray-400">AG Equipment, 18" Bandsaw 1.75 HP 1PH 115 V JT1-549 | Powerful 1.75 HP Motor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Our Beam Saws -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl">
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Why Us</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Why Choose Our <span class="text-gradient">Beam Saws?</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <div class="feature-card glass-light rounded-2xl p-8 border border-gray-700/30">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-blue-600/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-crosshairs text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">High Cutting Precision</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Cutting accuracy of ±0.1mm ensures smooth edges and
+                        eliminates rework. Perfect for high-end furniture production.</p>
+                </div>
+
+                <div class="feature-card glass-light rounded-2xl p-8 border border-gray-700/30">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-secondary/20 to-orange-600/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Time-Saving</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Cut more boards in less time, increasing production
+                        efficiency by up to 50%. Automated operations reduce manual labor.</p>
+                </div>
+
+                <div class="feature-card glass-light rounded-2xl p-8 border border-gray-700/30">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Automatic Loading</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Optional front-loading platform reduces labor needs
+                        by 2-3 workers. Fully automated material handling system.</p>
+                </div>
+
+                <div class="feature-card glass-light rounded-2xl p-8 border border-gray-700/30">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-violet-600/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-layer-group text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Multi-Material Cutting</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Ideal for MDF, particleboard, plywood, and more.
+                        Versatile cutting solutions for diverse furniture materials.</p>
+                </div>
+
+                <div class="feature-card glass-light rounded-2xl p-8 border border-gray-700/30">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-yellow-500/20 to-amber-600/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-certificate text-yellow-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">CE/FDA/ISO Certified</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Exported to over 80 countries worldwide. All
+                        machines meet international quality and safety standards.</p>
+                </div>
+
+                <div class="feature-card glass-light rounded-2xl p-8 border border-gray-700/30">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-red-500/20 to-rose-600/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-red-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">24/7 Service</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Remote diagnostics, spare parts, on-site
+                        maintenance services. Global support network for uninterrupted production.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Feedback - Masonry Grid with Hover Popup -->
+    <section id="feedback" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Testimonials</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    <span class="text-gradient">Customer Feedback</span>
+                </h2>
+                <div class="flex items-center justify-center gap-2 text-gray-400">
+                    <i class="fas fa-phone-alt text-primary"></i>
+                    <span>Contact us now | Get Real Customer Cases in Your Area!</span>
+                </div>
+            </div>
+
+            <div class="masonry-grid reveal" id="customer-grid">
+                <!-- Italian Customer -->
+                <div class="masonry-item customer-card cursor-pointer" onclick="openCustomerModal('italian')">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80"
+                                alt="Italian Customer"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/it.png" alt="Italy"
+                                    class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">ITALIAN</span>
+                            </div>
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div
+                                    class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"It Was A Great Amazing Experience"</p>
+                            <p class="text-sm text-gray-400 italic">"It was a great pleasure to visit DomBor Global.
+                                DomBor Global has an outstanding team and extensive expertise in machinery. A fantastic
+                                experience overall!"</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Italy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- US Customer -->
+                <div class="masonry-item customer-card cursor-pointer" onclick="openCustomerModal('us')">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80"
+                                alt="US Customer"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/us.png" alt="USA"
+                                    class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">US</span>
+                            </div>
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div
+                                    class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Definitely We Will Be DomBor Global Customers
+                                Again"</p>
+                            <p class="text-sm text-gray-400 italic">"Actually we are using that machine for two years
+                                and we have a very good experience with it. They have very professional salesteam and
+                                customer service. Definitely we will be their customers again."</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from USA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saudi Arabian Customer -->
+                <div class="masonry-item customer-card cursor-pointer" onclick="openCustomerModal('saudi')">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80"
+                                alt="Saudi Customer"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia"
+                                    class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">SAUDI ARABIAN</span>
+                            </div>
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div
+                                    class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Professional Service, Perfect Machine"</p>
+                            <p class="text-sm text-gray-400 italic">"Our after-sales technical team provided on-site
+                                installation and technical training for our Saudi Arabian customer. They are highly
+                                satisfied with both our six-sided CNC drilling machine and our professional service."
+                            </p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Saudi Arabia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slovenia Customer -->
+                <!-- <div class="masonry-item customer-card cursor-pointer" onclick="openCustomerModal('slovenia')">
+                    <div
+                        class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-800/80 to-gray-900/80 border border-gray-700/50 group">
+                        <div class="relative h-60 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80"
+                                alt="Slovenia Customer"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <img src="https://flagcdn.com/w40/si.png" alt="Slovenia"
+                                    class="w-8 h-auto rounded shadow-lg">
+                                <span class="text-white font-bold text-lg">SLOVENIA</span>
+                            </div>
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div
+                                    class="play-btn w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50">
+                                    <i class="fas fa-play text-white ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-white font-semibold mb-2">"Looking Forward to Working Together in the Future"
+                            </p>
+                            <p class="text-sm text-gray-400 italic">"Helen for guiding us through the company and
+                                showcasing their products. It was a great experience, and we look forward to working
+                                together in the future!"</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-user text-primary text-xs"></i>
+                                </div>
+                                <span class="text-primary text-sm font-medium">Users from Slovenia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Blue Elephant CNC -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="text-primary text-sm font-semibold tracking-wider uppercase">About us</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-8">
+                        AG Equipment <span class="text-gradient">CNC</span>
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-blue-600/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-award text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">16+ Years of Experience</h4>
+                                <p class="text-gray-400 text-sm">Delivering high-quality CNC solutions with proven
+                                    expertise. Over 2,000 machines in operation worldwide.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary/20 to-orange-600/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-industry text-secondary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Smart Factory</h4>
+                                <p class="text-gray-400 text-sm">75,000m² facility with advanced technology and strict
+                                    quality control. Green manufacturing, harmony with Earth.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-tools text-green-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Expert Support</h4>
+                                <p class="text-gray-400 text-sm">24/7 tech support, training & full after-sales service.
+                                    Remote diagnostics and on-site maintenance.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-violet-600/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-globe text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Global Presence</h4>
+                                <p class="text-gray-400 text-sm">Exported to 180+ countries with fast delivery and
+                                    support. Technology-guarded production safety.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#contact"
+                        class="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all glow">
+                        <i class="fas fa-phone"></i>
+                        Contact us now
+                    </a>
+                </div>
+
+                <div class="relative reveal">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"
+                            alt="Blue Elephant Factory" class="w-full h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent">
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                            <div class="text-5xl font-display font-bold text-white mb-2">AG Equipment</div>
+                            <div class="text-2xl text-primary">CNC</div>
+                            <div class="text-lg text-gray-300 mt-2">15th Anniversary Special Work</div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div
+                                class="play-btn w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/50 cursor-pointer">
+                                <i class="fas fa-play text-white text-xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Our Advanced Manufacturing Facility - Masonry Grid -->
+    <section id="facility" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-darker"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-secondary text-sm font-semibold tracking-wider uppercase">Factory Tour</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Visit Our <span class="text-gradient">Advanced Manufacturing Facility</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Our 75,000m² smart factory combines advanced automation and
+                    strict quality standards to deliver world-class CNC solutions.</p>
+            </div>
+
+            <div class="masonry-grid reveal">
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C1.webp" alt="Factory Exterior"
+                            class="manufacturing-img w-full h-56 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">Factory Exterior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C2.webp" alt="Production Line"
+                            class="manufacturing-img w-full h-48 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">Production Line</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C3.webp" alt="Assembly Workshop"
+                            class="manufacturing-img w-full h-64 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">Assembly Workshop</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C4.webp" alt="Quality Control"
+                            class="manufacturing-img w-full h-52 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">Quality Control</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C5.webp" alt="R&D Center"
+                            class="manufacturing-img w-full h-44 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">R&D Center</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C6.jpeg" alt="Warehouse"
+                            class="manufacturing-img w-full h-60 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">Warehouse</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C10.jpeg" alt="Testing Area"
+                            class="manufacturing-img w-full h-50 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">Testing Area</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C9.jpeg" alt="Team Photo"
+                            class="manufacturing-img w-full h-60 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">Our Team</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item group">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="../static/images/C8.jpeg" alt="Team Photo"
+                            class="manufacturing-img w-full h-60 object-cover rounded-2xl">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white font-semibold">Our Team</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get a Free Quote Form -->
+    <section id="quote" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-3xl">
+        </div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <span class="text-primary text-sm font-semibold tracking-wider uppercase">Get Started</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+                    Get a <span class="text-gradient">Free Quote</span>
+                </h2>
+                <p class="text-gray-400">Tell us your board size, quantity, and budget - we will recommend the best
+                    model.</p>
+            </div>
+
+            <div class="glass-light rounded-2xl p-8 md:p-12 border border-gray-700/30 reveal">
+                <form id="quote-form" class="space-y-6">
+                    {% csrf_token %}
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Name <span
+                                    class="text-red-400">*</span></label>
+                            <input type="text" name="name" placeholder="Your Name"
+                                class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Phone <span
+                                    class="text-red-400">*</span></label>
+                            <input type="tel" name="phone" placeholder="Phone / WhatsApp / Skype"
+                                class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Email <span
+                                    class="text-red-400">*</span></label>
+                            <input type="email" name="email" placeholder="Your Email"
+                                class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Country</label>
+                            <input type="text" name="country" placeholder="Your Country"
+                                class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Message <span
+                                class="text-red-400">*</span></label>
+                        <textarea rows="4" name="message" placeholder="Your needs (material, size or application)."
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"></textarea>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-lg">
+                            <i class="fas fa-check-circle text-green-400"></i>
+                            <span class="text-green-400 text-sm font-medium">Success!</span>
+                        </div>
+                        <div class="px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg">
+                            <span class="text-gray-400 text-sm">Cloudflare Protected</span>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-4 bg-gradient-to-r from-primary to-blue-600 text-white font-bold text-lg rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all glow">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-black/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Logo & Social -->
+                <div>
+                    <a href="#" class="flex items-center gap-3 mb-6">
+                        <img src="../static/images/logo.png" alt="Saw Logo"
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center glow">
+                        <!-- <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div> -->
+                        <div>
+                            <span class="text-xl font-display font-bold text-white">AG Equipment</span>
+                            <span class="text-xs text-primary block -mt-1">CNC MACHINERY</span>
+                        </div>
+                    </a>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary transition-all">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">PRODUCTS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Furniture CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC
+                                Router</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Laser
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Stone CNC
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Oscillating
+                                Knife Cutting Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Computer Beam
+                                Saw</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Nesting
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Edgebander
+                                Machine</a></li>
+                        <li><a href="{% url 'products' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">CNC Drilling
+                                Machine</a></li>
+                    </ul>
+                    </ul>
+                </div>
+
+                <!-- About -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">ABOUT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'about' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">About</a>
+                        </li>
+                        <li><a href="{% url 'blog' %}" class="text-gray-400 hover:text-primary transition-colors text-sm">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">SUPPORT</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Technical
+                                Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Spare
+                                Parts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Training</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Warranty</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">CONTACT</h4>
+                    <ul class="space-y-3">
+                        <li class="text-gray-400 text-sm">agequipmentcompany0@gmail.com</li>
+                        <li class="text-gray-400 text-sm">+15042062277</li>
+                        <li class="text-gray-400 text-sm">3401 W Albany Broken Arrow, OK 74012</li>
+                    </ul>
+
+                </div>
+
+                <div class="mt-6">
+                    <h5 class="text-white font-bold mb-3 text-sm">PAYMENT METHOD:</h5>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Letter of
+                            Credit</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>CASH</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>PAYPAL</li>
+                        <li class="text-gray-400 text-sm"><i class="fas fa-check text-primary mr-2"></i>Western
+                            Union MoneyGram</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Payment Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Refund Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Shipping Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Return Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Guarantee and
+                            Warranty</a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Use</a>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="text-gray-500 text-sm">©2026 All Rights Reserved</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="#"
+        class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 whatsapp-float hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
+    </a>
+
+    <!-- Customer Modal -->
+    <div id="customer-modal"
+        class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="modal-content glass rounded-2xl max-w-2xl w-full p-8 relative">
+            <button onclick="closeCustomerModal()"
+                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modal-body" class="text-center">
+                <!-- Content will be injected by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleVideo(id) {
+            const video = document.getElementById("video-" + id);
+            const icon = document.getElementById("icon-" + id);
+            const card = video.closest(".video-card");
+
+            // pause all other videos
+            document.querySelectorAll("video").forEach(v => {
+                if (v.id !== "video-" + id) {
+                    v.pause();
+                    v.closest(".video-card").classList.remove("active-card");
+                }
+            });
+
+            if (video.paused) {
+                video.play();
+                icon.classList.remove("fa-play");
+                icon.classList.add("fa-pause");
+
+                // STOP SLIDING (freeze card)
+                card.classList.add("active-card");
+
+            } else {
+                video.pause();
+                icon.classList.remove("fa-pause");
+                icon.classList.add("fa-play");
+
+                card.classList.remove("active-card");
+            }
+
+            video.onended = () => {
+                icon.classList.remove("fa-pause");
+                icon.classList.add("fa-play");
+                card.classList.remove("active-card");
+            };
+        }
+    </script>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass');
+            } else {
+                navbar.classList.remove('glass');
+            }
+        });
+
+        // Hero Slider
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        const progressBar = document.getElementById('hero-progress');
+        let currentSlide = 0;
+        const slideInterval = 5000;
+        let progress = 0;
+        let progressInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            dots.forEach((dot, i) => {
+                dot.style.background = i === index ? 'linear-gradient(90deg, #0ea5e9, #f97316)' : 'rgba(255,255,255,0.3)';
+                dot.style.width = i === index ? '48px' : '48px';
+            });
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            showSlide((currentSlide + 1) % slides.length);
+        }
+
+        function startProgress() {
+            progress = 0;
+            clearInterval(progressInterval);
+            progressInterval = setInterval(() => {
+                progress += 100 / (slideInterval / 100);
+                progressBar.style.width = progress + '%';
+                if (progress >= 100) {
+                    nextSlide();
+                    startProgress();
+                }
+            }, 100);
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                startProgress();
+            });
+        });
+
+        showSlide(0);
+        startProgress();
+
+        // Particles Canvas
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(14, 165, 233, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Customer Modal Data
+        const customerData = {
+            italian: {
+                flag: 'https://flagcdn.com/w80/it.png',
+                country: 'Italian Customer',
+                title: 'It Was A Great Amazing Experience',
+                quote: '"It was a great pleasure to visit Blue Elephant. Blue Elephant has an outstanding team and extensive expertise in machinery. A fantastic experience overall!"',
+                rating: 5
+            },
+            us: {
+                flag: 'https://flagcdn.com/w80/us.png',
+                country: 'US Customer',
+                title: 'Definitely We Will Be Blue Elephant Customers Again',
+                quote: '"Actually we are using that machine for two years and we have a very good experience with it. They have very professional salesteam and customer service. Definitely we will be their customers again."',
+                rating: 5
+            },
+            saudi: {
+                flag: 'https://flagcdn.com/w80/sa.png',
+                country: 'Saudi Arabian Customer',
+                title: 'Professional Service, Perfect Machine',
+                quote: '"Our after-sales technical team provided on-site installation and technical training for our Saudi Arabian customer. They are highly satisfied with both our six-sided CNC drilling machine and our professional service."',
+                rating: 5
+            },
+            slovenia: {
+                flag: 'https://flagcdn.com/w80/si.png',
+                country: 'Slovenia Customer',
+                title: 'Looking Forward to Working Together in the Future',
+                quote: '"Helen for guiding us through the company and showcasing their products. It was a great experience, and we look forward to working together in the future!"',
+                rating: 5
+            }
+        };
+
+        function openCustomerModal(customer) {
+            const data = customerData[customer];
+            const modal = document.getElementById('customer-modal');
+            const body = document.getElementById('modal-body');
+
+            body.innerHTML = `
+                <img src="${data.flag}" alt="${data.country}" class="w-20 h-auto rounded-lg mx-auto mb-4 shadow-2xl">
+                <h3 class="text-2xl font-display font-bold text-white mb-2">${data.country}</h3>
+                <p class="text-primary font-semibold mb-4">${data.title}</p>
+                <p class="text-gray-300 italic mb-6">${data.quote}</p>
+                <div class="flex justify-center gap-1 mb-6">
+                    ${Array(data.rating).fill('<i class="fas fa-star text-yellow-400"></i>').join('')}
+                </div>
+                <button class="px-8 py-3 bg-gradient-to-r from-primary to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-play mr-2"></i>Watch Video
+                </button>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function closeCustomerModal() {
+            document.getElementById('customer-modal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('customer-modal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeCustomerModal();
+            }
+        });
+
+        // Form Submission
+        document.getElementById('quote-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your inquiry! Our team will contact you within 24 hours.');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById("quote-form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("{% url 'quote' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.status === "success") {
+                    alert(data.message);  // success message
+                    form.reset();         // clear form
+                } else {
+                    alert(data.message);   // error message
+                }
+
+            } catch (error) {
+                console.log(error);
+                alert("Something went wrong!");
+            }
+        });
+    </script>
+</body>
+
+</html>
