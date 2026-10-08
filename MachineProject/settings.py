@@ -30,7 +30,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["domborglobalmachine.onrender.com", "domborglobalmachine.com", "www.domborglobalmachine.com"]
 
-CSRF_TRUSTED_ORIGINS = ["domborglobalmachine.onrender.com", 'https://domborglobalmachine.com', 'https://www.domborglobalmachine.com']
+CSRF_TRUSTED_ORIGINS = ["https://domborglobalmachine.onrender.com", 'https://domborglobalmachine.com', 'https://www.domborglobalmachine.com']
 
 
 # Application definition
