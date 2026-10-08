@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,9 @@ SECRET_KEY = 'django-insecure-*_pwr8odnf1*o^#d$m(x83h(z2aj9@=r8&+!*ww_tk85ip$6r(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["domborglobalmachine.onrender.com", "www.domborglobalmachine.onrender.com"]
+ALLOWED_HOSTS = ["domborglobalmachine.onrender.com", "domborglobalmachine.com", "www.domborglobalmachine.com"]
+
+CSRF_TRUSTED_ORIGINS = ["domborglobalmachine.onrender.com", 'https://domborglobalmachine.com', 'https://www.domborglobalmachine.com']
 
 
 # Application definition
@@ -77,11 +80,18 @@ WSGI_APPLICATION = 'MachineProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+    )
 }
 
 
