@@ -1,0 +1,112 @@
+[
+{
+  "model": "MachineApp.video",
+  "pk": 8,
+  "fields": {
+    "title": "Gabbiani  G2 115 , G2 130",
+    "description": "Gabbiani G2 115 (3800) - 12' front load",
+    "video": "media/videos/WhatsApp_Video_2026-06-18_at_12.30.05_PM_bl8rtx",
+    "created_at": "2026-10-08T12:06:24.845Z"
+  }
+},
+{
+  "model": "MachineApp.video",
+  "pk": 9,
+  "fields": {
+    "title": "SCM Class TF 130 Fixed Shaper",
+    "description": "11 HP, 3-phase motor (220V)",
+    "video": "media/videos/WhatsApp_Video_2026-06-18_at_12.20.51_PM_hpyxnh",
+    "created_at": "2026-10-08T12:09:09.206Z"
+  }
+},
+{
+  "model": "MachineApp.video",
+  "pk": 10,
+  "fields": {
+    "title": "36 degree Industrial T- Glide",
+    "description": "SawStop Industrial Cabinet",
+    "video": "media/videos/WhatsApp_Video_2026-06-18_at_12.23.58_PM_ldbgyg",
+    "created_at": "2026-10-08T12:11:47.838Z"
+  }
+},
+{
+  "model": "MachineApp.video",
+  "pk": 11,
+  "fields": {
+    "title": "330C Rear Feeding Computer Beam Saw",
+    "description": "High Speed Industrial cutting",
+    "video": "media/videos/v1_T50iZwH_qpwabt",
+    "created_at": "2026-10-08T12:14:42.985Z"
+  }
+},
+{
+  "model": "MachineApp.video",
+  "pk": 12,
+  "fields": {
+    "title": "Entry-Level Computer Beam Saw",
+    "description": "Max Cutting length 2800mm - 4200mm",
+    "video": "media/videos/WhatsApp_Video_2026-06-18_at_11.35.27_AM_v1lojd",
+    "created_at": "2026-10-08T12:17:38.297Z"
+  }
+},
+{
+  "model": "MachineApp.video",
+  "pk": 13,
+  "fields": {
+    "title": "280HG Automatic Loading Computer Beam Saw",
+    "description": "Automatic Loading System",
+    "video": "media/videos/v1_kzmffd",
+    "created_at": "2026-10-08T12:19:52.228Z"
+  }
+},
+{
+  "model": "MachineApp.video",
+  "pk": 14,
+  "fields": {
+    "title": "420 Computer Beam Saw",
+    "description": "Large Format cutting up to 4200mm",
+    "video": "media/videos/WhatsApp_Video_2026-06-18_at_11.44.01_AM_e7dx3l",
+    "created_at": "2026-10-08T12:21:53.311Z"
+  }
+},
+{
+  "model": "MachineApp.quote",
+  "pk": 1,
+  "fields": {
+    "name": "Rotimi Michael james",
+    "phone": 9158865852,
+    "email": "rotimimichaeljames@gmail.com",
+    "country": "Nigeria",
+    "message": "hi"
+  }
+},
+{
+  "model": "MachineApp.quote",
+  "pk": 2,
+  "fields": {
+    "name": "Rotimi Michael james",
+    "phone": 9158865852,
+    "email": "rotimimichaeljames@gmail.com",
+    "country": "Nigeria",
+    "message": "hello"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$kSYAhLXNHIuaY76YWnpMQH$6fFZx462/NqF4/U05i34M3GkI1DzjppaKNTaVXAMVgo=",
+    "last_login": "2026-10-08T11:51:51.441Z",
+    "is_superuser": true,
+    "username": "mike",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@admin.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-06-18T14:43:28.843Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

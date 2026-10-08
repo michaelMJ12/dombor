@@ -23,12 +23,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*_pwr8odnf1*o^#d$m(x83h(z2aj9@=r8&+!*ww_tk85ip$6r('
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-*_pwr8odnf1*o^#d$m(x83h(z2aj9@=r8&+!*ww_tk85ip$6r(')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ["domborglobalmachine.onrender.com", "domborglobalmachine.com", "www.domborglobalmachine.com"]
+ALLOWED_HOSTS = [
+    "domborglobalmachine.onrender.com",
+    "domborglobalmachine.com",
+    "www.domborglobalmachine.com",
+    "127.0.0.1",
+    "localhost",
+]
 
 CSRF_TRUSTED_ORIGINS = ["https://domborglobalmachine.onrender.com", 'https://domborglobalmachine.com', 'https://www.domborglobalmachine.com']
 
@@ -41,9 +47,17 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'MachineApp'
 ]
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,7 +155,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
