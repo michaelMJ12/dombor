@@ -29,6 +29,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-*_pwr8odnf1*o^#d$m(x8
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
+    "agequipments.com",
+    "www.agequipments.com",
     "domborglobalmachine.onrender.com",
     "domborglobalmachine.com",
     "www.domborglobalmachine.com",
