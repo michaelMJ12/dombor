@@ -294,6 +294,75 @@
         .paused-slider {
             animation-play-state: paused !important;
         }
+
+
+        /* HERO SLIDER */
+        #home.hero-slider {
+            position: relative;
+            width: 100%;
+            min-height: 700px;
+            overflow: hidden;
+        }
+
+        /* Individual slides */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            z-index: 0;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        /* Background image */
+        .hero-slide>img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Hero text animation */
+        .hero-slide .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s ease;
+        }
+
+        .hero-slide .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Particle canvas */
+        #particles-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* Responsive height */
+        @media (max-width: 768px) {
+            #home.hero-slider {
+                min-height: 750px;
+            }
+        }
     </style>
 </head>
 
@@ -2079,6 +2148,7 @@
         }
 
 
+
         // ==========================================
         // HERO SLIDER - AG EQUIPMENT
         // ==========================================
@@ -2088,26 +2158,40 @@
         const progressBar = document.getElementById('hero-progress');
 
         let currentSlide = 0;
-        const slideInterval = 6000; // 6 seconds per slide
+        const slideInterval = 6000;
         let progressInterval = null;
         let slideStartTime = 0;
 
-        // Display selected slide
         function showSlide(index) {
-
             if (!slides.length) return;
 
-            // Keep index within slide range
             index = (index + slides.length) % slides.length;
 
-            // Update slides
             slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
+                const isActive = i === index;
+
+                slide.classList.toggle('active', isActive);
+
+                // Reset reveal animations on every slide
+                const revealItems = slide.querySelectorAll('.reveal');
+
+                revealItems.forEach(item => {
+                    item.classList.remove('visible');
+                });
+
+                // Reveal heading, descriptions and buttons on active slide
+                if (isActive) {
+                    requestAnimationFrame(() => {
+                        revealItems.forEach((item, itemIndex) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, itemIndex * 120);
+                        });
+                    });
+                }
             });
 
-            // Update navigation dots
             dots.forEach((dot, i) => {
-
                 const isActive = i === index;
 
                 dot.style.background = isActive
@@ -2115,30 +2199,21 @@
                     : 'rgba(255,255,255,0.3)';
 
                 dot.style.width = '48px';
-
                 dot.setAttribute('aria-current', isActive ? 'true' : 'false');
             });
 
             currentSlide = index;
 
-            // Reset progress bar
             if (progressBar) {
                 progressBar.style.width = '0%';
             }
         }
 
-
-        // Move to next slide
         function nextSlide() {
-            if (!slides.length) return;
-
             showSlide((currentSlide + 1) % slides.length);
         }
 
-
-        // Start or restart slide progress
         function startProgress() {
-
             if (!slides.length || document.hidden) return;
 
             clearInterval(progressInterval);
@@ -2150,74 +2225,46 @@
             }
 
             progressInterval = setInterval(() => {
-
-                // Calculate elapsed time
                 const elapsed = Date.now() - slideStartTime;
-
                 const progress = Math.min(
                     (elapsed / slideInterval) * 100,
                     100
                 );
 
-                // Update progress bar
                 if (progressBar) {
                     progressBar.style.width = progress + '%';
                 }
 
-                // Automatically change slide
                 if (elapsed >= slideInterval) {
-
+                    clearInterval(progressInterval);
                     nextSlide();
-
-                    // Restart timer for next slide
                     startProgress();
                 }
-
             }, 50);
         }
 
-
-        // Navigation dot click events
+        // Navigation dots
         dots.forEach((dot, index) => {
-
             dot.addEventListener('click', () => {
-
                 clearInterval(progressInterval);
-
-                // Show selected slide
                 showSlide(index);
-
-                // Restart autoplay
                 startProgress();
-
             });
-
         });
 
-
-        // Pause autoplay when browser tab is hidden
+        // Pause when browser tab is hidden
         document.addEventListener('visibilitychange', () => {
-
             if (document.hidden) {
-
                 clearInterval(progressInterval);
-
             } else {
-
                 startProgress();
-
             }
-
         });
 
-
-        // Initialize slider
-        if (slides.length > 0) {
-
+        // Initialize
+        if (slides.length) {
             showSlide(0);
-
             startProgress();
-
         }
 
 
@@ -2306,6 +2353,7 @@
         // SCROLL REVEAL
         // ==========================================
 
+
         const revealElements = document.querySelectorAll('.reveal');
 
         if ('IntersectionObserver' in window) {
@@ -2314,21 +2362,40 @@
 
                 entries.forEach(entry => {
 
+                    // Hero slides are controlled by the hero slider
+                    if (entry.target.closest('.hero-slide')) {
+                        return;
+                    }
+
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                     }
 
                 });
 
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1
+            });
 
-            revealElements.forEach(el => revealObserver.observe(el));
+            revealElements.forEach(el => {
+                if (!el.closest('.hero-slide')) {
+                    revealObserver.observe(el);
+                }
+            });
 
         } else {
 
-            revealElements.forEach(el => el.classList.add('visible'));
+            revealElements.forEach(el => {
+                if (!el.closest('.hero-slide')) {
+                    el.classList.add('visible');
+                }
+            });
 
         }
+
+        // ==========================================
+        // END SCROLL REVEAL
+        // ==========================================
 
 
         // ==========================================
